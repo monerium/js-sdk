@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@monerium/sdk": ["libs/sdk/dist/index.mjs"],
+      "@monerium/ui": ["libs/ui/src/index.ts"],
+      "@monorepo/sdk-example-nextjs": ["apps/sdk-example-nextjs/src/index.ts"],
+      "@monorepo/sdk-example-react": ["apps/sdk-example-react/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
