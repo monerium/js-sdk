@@ -28,9 +28,11 @@ jobs:
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
         # if: ${{ steps.release.outputs.releases_created }}
+      - run: echo "Release ${{ steps.release.outputs['packages/sdk-react-provider--tag_name'] }} created for sdk-react-provider."
+        if: ${{ steps.release.outputs['packages/sdk-react-provider--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t lint --base=origin/main --head=${{ steps.release.outputs.sha }}
+        run: yarn nx affected -t lint --base=origin/main --head=origin/release-please--branches--main
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         # if: ${{ steps.release.outputs.releases_created }}
