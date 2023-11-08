@@ -51,3 +51,5 @@ https://codesandbox.io/s/monerium-sdk-react-provider-pntvgs?file=/src/index.js
 ## Running unit tests
 
 Run `nx test sdk-react-provider` to execute the unit tests via [Vitest](https://vitest.dev/).
+
+#
