@@ -1,5 +1,3 @@
-// Initial Version
-// The simplest way to tell release-please the current version for a package it has never released before is to manually add an entry into .release-please-manifest.json. This change should be made directly on the default/configured branch or on a separate, user-created branch/PR which is then merged into the default/configured branch.
 {
   "libs/sdk-react-provider": "0.0.3"
 }
