@@ -15,6 +15,4 @@ const MONERIUM_CONFIG: Config = {
   },
 };
 
-//jkj
-
 export { MONERIUM_CONFIG };
