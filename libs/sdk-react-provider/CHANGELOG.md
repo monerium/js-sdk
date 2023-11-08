@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.4...sdk-react-provider-v0.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* correct prop for initializing class ([cc509bf](https://github.com/monerium/public-monorepo/commit/cc509bffe5f7ef3c15a52af3cc18a1e89fd3b9ac))
+
 ## [0.0.4](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.3...sdk-react-provider-v0.0.4) (2023-11-08)
 
 
