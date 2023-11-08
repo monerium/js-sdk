@@ -1,4 +1,4 @@
-import React, { useCallback, FC, useEffect, useState, ReactNode } from 'react';
+import { useCallback, FC, useEffect, useState, ReactNode } from 'react';
 
 import { MoneriumContext } from './context';
 
