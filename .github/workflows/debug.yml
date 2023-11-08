@@ -1,4 +1,4 @@
-name: Build
+name: Debug
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
         # a new release is created:
       - run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-      - run: yarn affected -t li
+      - run: yarn affected -t lint
