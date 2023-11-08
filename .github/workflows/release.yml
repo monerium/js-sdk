@@ -11,6 +11,10 @@ jobs:
   release-please:
     name: "Create release"
     runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      package_names: ${{ steps.get-package-names.outputs.package_names }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
@@ -18,7 +22,13 @@ jobs:
           command: manifest
           token: ${{secrets.GITHUB_TOKEN}}
           default-branch: main
-
+      - name: Find Package Names
+        id: get-package-names
+        run: |
+          PACKAGE_NAMES=$(find . -name 'package.json' -exec jq -r '.name' {} \;)
+          echo "Package names: $PACKAGE_NAMES"
+          echo "::set-output name=package_names::$PACKAGE_NAMES"
+        if: ${{ steps.release.outputs.releases_created }}
       # The logic below handles the npm publication:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -35,9 +45,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created }}
-    outputs:
-      releases_created: ${{ steps.release.outputs.releases_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
+
   echo:
     needs: [release-please]
     runs-on: ubuntu-latest
@@ -46,3 +54,4 @@ jobs:
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
           echo '${{ needs.release-please.outputs.tag_name }}'
+          echo '${{ needs.release-please.outputs.package_names }}'

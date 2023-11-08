@@ -90,7 +90,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`,
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`
     );
     replaceMock.mockRestore();
   });
@@ -141,7 +141,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`,
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`
     );
   });
 
@@ -160,7 +160,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`,
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`
     );
   });
 
@@ -176,7 +176,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(test).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`,
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`
     );
   });
 
@@ -256,7 +256,7 @@ describe('MoneriumClient', () => {
           network: 'goerli',
           address: PUBLIC_KEY,
         }),
-      ]),
+      ])
     );
   }, 15000);
 
@@ -270,7 +270,7 @@ describe('MoneriumClient', () => {
 
     const orders = await client.getOrders();
     const order = orders.find(
-      (o: Order) => o.memo === 'Powered by Monerium',
+      (o: Order) => o.memo === 'Powered by Monerium'
     ) as Order;
 
     expect(order.kind).toBe('redeem');
@@ -354,7 +354,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`,
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code`
     );
     replaceMock.mockRestore();
   });
@@ -427,7 +427,6 @@ describe('MoneriumClient', () => {
         network: 'goerli',
       })
       .catch((err) => {
-        // eslint-disable-next-line jest/no-conditional-expect
         expect(err.message).toBe('Invalid signature');
       });
   });
@@ -466,7 +465,6 @@ describe('MoneriumClient', () => {
         network: 'goerli',
       })
       .catch((err) => {
-        // eslint-disable-next-line jest/no-conditional-expect
         expect(err.message).toBe('Timestamp is expired');
       });
   });
