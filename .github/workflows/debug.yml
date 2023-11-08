@@ -15,4 +15,4 @@ jobs:
         # a new release is created:
       - run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-      - run: yarn affected -t lint
+      - run: yarn nx affected -t lint
