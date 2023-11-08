@@ -40,7 +40,7 @@ export const MoneriumProvider: FC<MoneriumProviderProps> = ({
   // Initialize the SDK
   useEffect(() => {
     const sdk = new MoneriumClient({
-      env: environment,
+      environment: environment,
       clientId,
       redirectUrl,
     });
