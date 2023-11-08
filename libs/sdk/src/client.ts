@@ -41,8 +41,6 @@ import {
 
 // import pjson from "../package.json";
 
-// test
-
 const isServer = typeof window === 'undefined';
 
 export class MoneriumClient {
@@ -134,7 +132,7 @@ export class MoneriumClient {
 
   // TODO: TEST auto link & manual link + address
   async connect(
-    client?: AuthorizationCodeCredentials | ClientCredentials,
+    client?: AuthorizationCodeCredentials | ClientCredentials
   ): Promise<boolean> {
     const clientId = client?.clientId || this.#client?.clientId;
     const clientSecret =
@@ -146,7 +144,7 @@ export class MoneriumClient {
         throw new Error('Only use client credentials on server side');
       }
       await this.#clientCredentialsAuthorization(
-        this.#client as ClientCredentials,
+        this.#client as ClientCredentials
       );
       return !!this.bearerProfile;
     }
@@ -214,7 +212,7 @@ export class MoneriumClient {
       'post',
       `auth/token`,
       params as unknown as Record<string, string>,
-      true,
+      true
     )
       .then((res) => {
         this.bearerProfile = res;
@@ -222,7 +220,7 @@ export class MoneriumClient {
         this.#authorizationHeader = `Bearer ${res?.access_token}`;
         window.sessionStorage.setItem(
           STORAGE_REFRESH_TOKEN,
-          this.bearerProfile?.refresh_token || '',
+          this.bearerProfile?.refresh_token || ''
         );
       })
       .catch((err) => {
@@ -308,7 +306,7 @@ export class MoneriumClient {
     return this.#api(
       'post',
       `profiles/${profileId}/addresses`,
-      JSON.stringify(body),
+      JSON.stringify(body)
     );
   }
 
@@ -322,7 +320,7 @@ export class MoneriumClient {
       return this.#api<Order>(
         'post',
         `profiles/${profileId}/orders`,
-        JSON.stringify(req),
+        JSON.stringify(req)
       );
     } else {
       return this.#api<Order>('post', `orders`, JSON.stringify(req));
@@ -334,14 +332,14 @@ export class MoneriumClient {
    */
   uploadSupportingDocument(document: File): Promise<SupportingDoc> {
     const searchParams = urlEncoded(
-      document as unknown as Record<string, string>,
+      document as unknown as Record<string, string>
     );
 
     return this.#api<SupportingDoc>(
       'post',
       'files/supporting-document',
       searchParams,
-      true,
+      true
     );
   }
 
@@ -351,7 +349,7 @@ export class MoneriumClient {
     method: string,
     resource: string,
     body?: BodyInit | Record<string, string>,
-    isFormEncoded?: boolean,
+    isFormEncoded?: boolean
   ): Promise<T> {
     return rest<T>(
       `${this.#env.api}/${resource}`,
@@ -362,7 +360,7 @@ export class MoneriumClient {
         'Content-Type': `application/${
           isFormEncoded ? 'x-www-form-urlencoded' : 'json'
         }`,
-      },
+      }
     );
   }
 
@@ -375,7 +373,7 @@ export class MoneriumClient {
   #authCodeAuthorization = async (
     clientId: string,
     redirectUrl: string,
-    authCode: string,
+    authCode: string
   ) => {
     const codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER) || '';
 
@@ -408,7 +406,7 @@ export class MoneriumClient {
 
   #refreshTokenAuthorization = async (
     clientId: string,
-    refreshToken: string,
+    refreshToken: string
   ) => {
     return await this.getBearerToken({
       refresh_token: refreshToken,
@@ -445,7 +443,7 @@ export class MoneriumClient {
       const notification = JSON.parse(event.data) as OrderNotification;
 
       this.#subscriptions.get(notification.meta.state as OrderState)?.(
-        notification,
+        notification
       );
     });
 
