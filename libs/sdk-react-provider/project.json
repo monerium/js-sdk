@@ -12,12 +12,20 @@
         "lintFilePatterns": ["libs/sdk-react-provider/**/*.{ts,tsx,js,jsx}"]
       }
     },
+    "prepublish": {
+      "command": "echo",
+      "dependsOn": ["build", "test", "lint"]
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs test {args.ver} {args.tag}",
+      "dependsOn": ["prepublish"]
+    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "libs/sdk-react-provider/dist"
+        "outputPath": "dist/libs/sdk-react-provider"
       },
       "configurations": {
         "development": {

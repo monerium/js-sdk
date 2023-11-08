@@ -18,4 +18,4 @@ jobs:
         # a new release is created:
       - run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-      - run: yarn nx prepublish
+      - run: yarn nx run-many -t prepublish

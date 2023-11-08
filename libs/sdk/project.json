@@ -15,6 +15,10 @@
       "command": "echo {args.ver} {args.tag}",
       "dependsOn": ["build", "test", "lint"]
     },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs test {args.ver} {args.tag}",
+      "dependsOn": ["prepublish"]
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],

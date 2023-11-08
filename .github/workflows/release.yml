@@ -22,13 +22,6 @@ jobs:
           command: manifest
           token: ${{secrets.GITHUB_TOKEN}}
           default-branch: main
-      - name: Find Package Names
-        id: get-package-names
-        run: |
-          PACKAGE_NAMES=$(find . -name 'package.json' -exec jq -r '.name' {} \;)
-          echo "Package names: $PACKAGE_NAMES"
-          echo "::set-output name=package_names::$PACKAGE_NAMES"
-        if: ${{ steps.release.outputs.releases_created }}
       # The logic below handles the npm publication:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -39,12 +32,22 @@ jobs:
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
         if: ${{ steps.release.outputs.releases_created }}
-      - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        # run: yarn npm publish
-        run: yarn nx build sdk-react-provider
+      # Conditionally publish packages based on changes in their respective dist directories
+      - name: Publish sdk-react-provider Package
+        if: ${{ steps.release.outputs.releases_created && contains(steps.release.outputs.release_created, 'sdk-react-provider') }}
+        run: |
+          cd dist/sdk-react-provider
+          npm pack --dry-run
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.releases_created }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish sdk Package
+        if: ${{ steps.release.outputs.releases_created && contains(steps.release.outputs.release_created, 'sdk') }}
+        run: |
+          cd dist/sdk
+          npm pack --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   echo:
     needs: [release-please]
@@ -53,5 +56,5 @@ jobs:
       - name: Debug
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
-          echo '${{ needs.release-please.outputs.tag_name }}'
-          echo '${{ needs.release-please.outputs.package_names }}'
+          echo '${{ steps.release-please.outputs.releases_created }}'
+          echo '${{ steps.release-please.outputs.release_created }}'
