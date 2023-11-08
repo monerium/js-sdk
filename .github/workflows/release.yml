@@ -1,0 +1,45 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "libs/sdk-react-provider/**"
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  release-please:
+    name: "Create release"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+
+      # The logic below handles the npm publication:
+      - uses: actions/checkout@v3
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
+      - name: Yarn install
+        run: yarn install --immutable --immutable-cache
+        # for security reasons, use --check-cache if accepting PRs from third-parties.
+        if: ${{ steps.release.outputs.release_created }}
+      - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
+        # run: yarn npm publish
+        run: yarn nx build sdk-react-provider
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+  echo:
+    needs: [release-please]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo '${{ needs.release-please.outputs.release_created || false }}'
+          echo '${{ needs.release-please.outputs.tag_name }}'
