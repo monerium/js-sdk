@@ -1,0 +1,7 @@
+.pnp.cjs
+.pnp.loader.mjs
+*.md
+.vscode/
+.yarn/
+static/
+dist/
