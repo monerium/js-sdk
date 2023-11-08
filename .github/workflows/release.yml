@@ -48,6 +48,11 @@ jobs:
           npm pack --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Debug
+        run: |
+          echo '${{ needs.release-please.outputs.releases_created || false }}'
+          echo '${{ steps.release.outputs.release_created }}'
+          echo '${{ steps.release.outputs.releases_created }}'
 
   echo:
     needs: [release-please]
