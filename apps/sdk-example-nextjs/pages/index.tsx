@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import { useMonerium } from '@monerium/ui';
+import { useMonerium } from '@monerium/sdk-react-provider';
 export function Index() {
   const {
     authorize,

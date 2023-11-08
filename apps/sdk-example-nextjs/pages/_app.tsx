@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
-import { MoneriumProvider } from '@monerium/ui';
+import { MoneriumProvider } from '@monerium/sdk-react-provider';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (

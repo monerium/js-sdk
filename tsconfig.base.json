@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@monerium/sdk": ["libs/sdk/dist/index.mjs"],
-      "@monerium/ui": ["libs/ui/src/index.ts"],
+      "@monerium/sdk": ["libs/sdk/src/index.ts"],
+      "@monerium/sdk-react-provider": ["libs/sdk-react-provider/src/index.ts"],
       "@monorepo/sdk-example-nextjs": ["apps/sdk-example-nextjs/src/index.ts"],
       "@monorepo/sdk-example-react": ["apps/sdk-example-react/src/index.ts"]
     }

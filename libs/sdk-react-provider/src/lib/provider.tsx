@@ -1,11 +1,7 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useCallback, FC, useEffect, useState, ReactNode } from 'react';
+
+import { MoneriumContext } from './context';
+
 import {
   MoneriumClient,
   LinkAddress,
@@ -13,46 +9,38 @@ import {
   Balances,
   Order,
   NewOrder,
+  Token,
 } from '@monerium/sdk';
 
-// Create a context
-export const MoneriumContext = createContext({
-  authorize: async () => {},
-  // connect: async () => {},
-  // getProfile: async () => {},
-  // getBalances: async () => {},
-  placeOrder: async () => {},
-  profile: null,
-  balances: null,
-  orders: null,
-  tokens: null,
-  isAuthorized: false,
-  loading: false,
-  loadingPlaceOrder: false,
-  error: null,
-});
+interface MoneriumProviderProps {
+  children: ReactNode;
+  clientId?: string;
+  redirectUrl?: string;
+  environment?: 'sandbox' | 'production';
+}
 
-// Provider component
-export function MoneriumProvider({
+export const MoneriumProvider: FC<MoneriumProviderProps> = ({
   children,
   clientId = 'f99e629b-6dca-11ee-8aa6-5273f65ed05b',
   redirectUrl = 'http://localhost:5173',
-}) {
-  const [monerium, setMonerium] = useState<MoneriumClient>(null);
+  environment = 'sandbox',
+}) => {
+  const [monerium, setMonerium] = useState<MoneriumClient>();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-  const [profile, setProfile] = useState<Profile>(null);
-  const [balances, setBalances] = useState<Balances[]>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [balances, setBalances] = useState<Balances[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingPlaceOrder, setLoadingPlaceOrder] = useState(false);
   const [loadingLinkAddress, setLoadingLinkAddress] = useState(false);
   const [loadingBalances, setLoadingBalances] = useState(false);
-  const [error, setError] = useState(null);
-  const [orders, setOrders] = useState<Order[]>(null);
-  const [tokens, setTokens] = useState(null);
+  const [error, setError] = useState<Error | unknown | null>(null);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [tokens, setTokens] = useState<Token[]>([]);
 
   // Initialize the SDK
   useEffect(() => {
     const sdk = new MoneriumClient({
+      env: environment,
       clientId,
       redirectUrl,
     });
@@ -69,7 +57,9 @@ export function MoneriumProvider({
     connect();
 
     return () => {
-      monerium.disconnect();
+      if (monerium) {
+        monerium.disconnect();
+      }
     };
   }, [monerium]);
 
@@ -101,7 +91,9 @@ export function MoneriumProvider({
 
   const authorize = useCallback(async () => {
     try {
-      await monerium.authorize();
+      if (monerium) {
+        await monerium.authorize();
+      }
     } catch (err) {
       console.error('Error during authorization:', err);
       setError(err);
@@ -130,8 +122,8 @@ export function MoneriumProvider({
           setLoadingPlaceOrder(true);
 
           let documentId;
-          if (orderDetails.amount > 15000) {
-            const uploadedDocument = await monerium.uploadSupportDocument(
+          if (parseInt(orderDetails.amount) > 15000 && supportingDocument) {
+            const uploadedDocument = await monerium.uploadSupportingDocument(
               supportingDocument
             );
             documentId = uploadedDocument.id;
@@ -157,13 +149,10 @@ export function MoneriumProvider({
 
   const linkAddress = useCallback(
     async (addressDetails: LinkAddress) => {
-      if (monerium && isAuthorized) {
+      if (monerium && isAuthorized && profile) {
         try {
           setLoadingLinkAddress(true);
-          const linkedAddress = await monerium.linkAddress(
-            profile.id,
-            addressDetails
-          );
+          return await monerium.linkAddress(profile.id, addressDetails);
 
           // Update your state or do something with linkedAddress
         } catch (err) {
@@ -199,13 +188,4 @@ export function MoneriumProvider({
       {children}
     </MoneriumContext.Provider>
   );
-}
-
-// Custom hook to use the Monerium SDK
-export function useMonerium() {
-  const context = useContext(MoneriumContext);
-  if (context === null) {
-    throw new Error('useMonerium must be used within a MoneriumProvider');
-  }
-  return context;
-}
+};
