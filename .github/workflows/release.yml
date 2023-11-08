@@ -24,19 +24,19 @@ jobs:
         uses: actions/checkout@v3
         # these if statements ensure that a publication only occurs when
         # a new release is created:
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
         # run: yarn npm publish
         run: yarn nx build sdk-react-provider
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
+      releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
   echo:
     needs: [release-please]
@@ -44,5 +44,5 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo '${{ needs.release-please.outputs.release_created || false }}'
+          echo '${{ needs.release-please.outputs.releases_created || false }}'
           echo '${{ needs.release-please.outputs.tag_name }}'
