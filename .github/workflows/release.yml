@@ -27,19 +27,19 @@ jobs:
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-        if: ${{ steps.release.outputs.releases_created }}
+        # if: ${{ steps.release.outputs.releases_created }}
       # Conditionally publish packages based on changes in their respective dist directories
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
         run: yarn nx affected -t lint --base=origin/main --head=HEAD
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.releases_created }}
+        # if: ${{ steps.release.outputs.releases_created }}
       - name: Debug
         run: |
           echo '${{ steps.release.outputs.tag_name }}'
           echo '${{ steps.release.outputs.releases_created || false }}'
-          echo '${{ steps.release.outputs.pr.headBranchName }}'
-          echo '${{ steps.release.outputs.pr.baseBranchName }}'
+          echo '${{ steps.release.outputs.pr }}'
+          echo '${{ steps.release.outputs.pr-branch }}'
           echo '${{ steps.release.outputs.pr.title }}'
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
