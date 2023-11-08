@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.0.4](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.3...sdk-react-provider-v0.0.4) (2023-11-08)
+
+
+### Features
+
+* sdk provider ([9c2defb](https://github.com/monerium/public-monorepo/commit/9c2defb626c7cb10ca98f184ec28171af9a29d3d))
+
+
+### Bug Fixes
+
+* . ([8d70c4d](https://github.com/monerium/public-monorepo/commit/8d70c4d08b9e52e70ca47c2b5e4d83ef0e6187d8))
+* add codesandbox demo to readme ([034dcef](https://github.com/monerium/public-monorepo/commit/034dcefdb26a7d97e3f0dae3c4fad02ed410d808))
+* add manifest to release-please GH action ([875b5c5](https://github.com/monerium/public-monorepo/commit/875b5c581885eb2f56b6f8336f1e25e0a2b89887))
+* correct prop for initializing class ([cc509bf](https://github.com/monerium/public-monorepo/commit/cc509bffe5f7ef3c15a52af3cc18a1e89fd3b9ac))
+* remove comment from manifest ([9ac4fcf](https://github.com/monerium/public-monorepo/commit/9ac4fcf9fa06d41fe8f6ea2cd9adc7253a77e4de))
+* remove unused dep ([6f3defe](https://github.com/monerium/public-monorepo/commit/6f3defebe9b25d2e64f5598eebe039bab199d541))
+* testing ([aa5057d](https://github.com/monerium/public-monorepo/commit/aa5057dcc5a6e1f68e50833097c1379d2f2c00f5))
+* testing GH actions ([7ac3aba](https://github.com/monerium/public-monorepo/commit/7ac3abab83d9b81136776a2c7cbc323d8a64be5e))
+
+
+### Miscellaneous Chores
+
+* release 0.0.4 ([c057779](https://github.com/monerium/public-monorepo/commit/c057779574346cbc448ca8b8605457afb8abaa56))
+
 ## [0.0.4](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.4...sdk-react-provider-v0.0.4) (2023-11-08)
 
 
