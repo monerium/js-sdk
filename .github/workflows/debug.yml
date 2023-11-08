@@ -2,9 +2,8 @@ name: Build
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
-      - release-please*
 
 jobs:
   build-test:
@@ -16,4 +15,4 @@ jobs:
         # a new release is created:
       - run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
-      - run: yarn nx run-many -t prepublish
+      - run: yarn affected -t li

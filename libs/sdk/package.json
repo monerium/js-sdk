@@ -10,15 +10,18 @@
   "bugs": {
     "url": "https://github.com/monerium/sdk/issues"
   },
-  "main": "./index.js",
-  "module": "./index.mjs",
-  "typings": "./index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">= 16.15"
   },

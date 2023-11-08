@@ -17,15 +17,19 @@
       "dependsOn": ["build", "test", "lint"]
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs test {args.ver} {args.tag}",
-      "dependsOn": ["prepublish"]
+      "dependsOn": ["prepublish"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish --access public",
+        "cwd": "libs/sdk-react-provider"
+      }
     },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/sdk-react-provider"
+        "outputPath": "libs/sdk-react-provider/dist"
       },
       "configurations": {
         "development": {

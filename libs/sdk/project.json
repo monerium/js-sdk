@@ -8,16 +8,20 @@
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/sdk"
+        "outputPath": "libs/sdk/dist"
       }
     },
     "prepublish": {
-      "command": "echo {args.ver} {args.tag}",
+      "command": "echo",
       "dependsOn": ["build", "test", "lint"]
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs test {args.ver} {args.tag}",
-      "dependsOn": ["prepublish"]
+      "dependsOn": ["prepublish"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm pack --dry-run",
+        "cwd": "libs/sdk"
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
