@@ -3,7 +3,9 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const MoneriumClient = require('../dist/index.umd.js').MoneriumClient;
+const MoneriumClient =
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('../../../dist/libs/sdk/index.js').MoneriumClient;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const constants = require('./constants');
 
