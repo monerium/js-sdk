@@ -84,7 +84,7 @@ jobs:
       - name: Debug
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
-          echo '${{ needs.release-please.outputs['libs/sdk--release_created'] || false }}'
+          echo '${{ needs.release-please.outputs.sdk_releases_created }}'
 
   deploy-static:
     name: Trigger static pages deploy
