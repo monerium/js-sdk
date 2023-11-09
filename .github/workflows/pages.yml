@@ -30,7 +30,7 @@ jobs:
       - name: Where am I?
         run: ls -al
       - name: Extract artifacts
-        run: tar -xvf libs/sdk/static.tar && mv static/* .
+        run: tar -xvf static.tar && mv static/* .
         shell: bash
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
