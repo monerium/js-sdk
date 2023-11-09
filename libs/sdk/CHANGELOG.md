@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.12](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.11...sdk-v2.6.12) (2023-11-09)
+
+
+### Bug Fixes
+
+* syntax ([f8cfbad](https://github.com/monerium/public-monorepo/commit/f8cfbad0fa536808ddc988cf9e6ca8aef5247ef7))
+
 ## [2.6.11](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.10...sdk-v2.6.11) (2023-11-09)
 
 
