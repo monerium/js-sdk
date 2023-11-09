@@ -72,6 +72,7 @@ jobs:
           echo '${{ steps.release.outputs.sha }}'
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
+      sdk_releases_created: ${{ steps.release.outputs['libs/sdk--release_created'] }}
       tag_name: ${{ steps.release.outputs.tag_name }}
       package_names: ${{ steps.release.outputs.package_names }}
       sdk_path: ${{ steps.release.outputs['libs/sdk--path'] }}
@@ -90,5 +91,5 @@ jobs:
     needs: [release-please]
     uses: './.github/workflows/pages.yml'
     with:
-      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs['libs/sdk--release_created'] || 'false' }}
+      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs.sdk_releases_created || 'false' }}
     secrets: inherit
