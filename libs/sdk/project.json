@@ -19,6 +19,13 @@
         "cwd": "libs/sdk"
       }
     },
+    "docs": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn docs",
+        "cwd": "libs/sdk"
+      }
+    },
     "publish": {
       "dependsOn": ["prepublish"],
       "executor": "nx:run-commands",

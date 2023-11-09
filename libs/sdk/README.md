@@ -107,8 +107,7 @@ let authFlowUrl = client.getAuthFlowURI({
   network: 'mumbai', // specify the network
   chain: 'polygon', // specify the chain
   address: '0xValidAddress72413Fa92980B889A1eCE84dD', // user wallet address
-  signature:
-    '0xValidSignature0df2b6c9e0fc067ab29bdbf322bec30aad7c46dcd97f62498a91ef7795957397e0f49426e000b0f500c347219ddd98dc5080982563055e918031c', // user wallet signature
+  signature: '0xValidSignature0df2b6c9e0fc067ab29bdbf322bec30aad7c46dcd97f62498a91ef7795957397e0f49426e000b0f500c347219ddd98dc5080982563055e918031c', // user wallet signature
 });
 
 // Store the code verifier securely between requests.
@@ -161,9 +160,7 @@ API documentation:
 const authCtx: AuthContext = await client.getAuthContext();
 
 // Fetching all accounts for a specific profile
-const { id: profileId, accounts }: Profile = await client.getProfile(
-  authCtx.profiles[0].id,
-);
+const { id: profileId, accounts }: Profile = await client.getProfile(authCtx.profiles[0].id);
 
 // Fetching all balances for a specific profile
 const balances: Balances = await client.getBalances(profileId);
@@ -302,9 +299,7 @@ When placing orders with payouts above 15,000 EUR, a supporting document is requ
 
 ```ts
 // Upload a supporting document
-const supportingDocumentId: SupportingDoc = await uploadSupportingDocument(
-  document,
-);
+const supportingDocumentId: SupportingDoc = await uploadSupportingDocument(document);
 ```
 
 Interfaces:
@@ -361,8 +356,6 @@ yarn link "@monerium/sdk"
 
 If you get an error that there is already a package called '@monerium/sdk' registered, but you can't find it and unlinking does nothing, remove it manually with `rm -rf ~/.config/yarn/link/@monerium` and try again.
 
-```sh
-
 #### Documentation
 
 Refer to [Typedocs](https://typedoc.org/) syntaxes to use for this [documentation](https://monerium.github.io/sdk/).
@@ -384,14 +377,3 @@ Common questions developers have regarding the SDK.
 ## Release Notes
 
 https://github.com/monerium/sdk/releases
-
-## License
-
-Information about the software license.
-
-[End of the SDK Documentation]
-
----
-
-This template is a comprehensive starting point. Each section should contain detailed information relevant to your SDK to guide your users from installation to effective usage and troubleshooting. Be sure to adjust the headers and content to suit your SDK's unique needs and features.
-```

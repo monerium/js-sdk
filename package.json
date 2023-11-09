@@ -10,7 +10,8 @@
     "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "typedoc": "0.23.23"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
