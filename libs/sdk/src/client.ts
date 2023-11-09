@@ -40,7 +40,7 @@ import {
 } from './helpers';
 
 // import pjson from "../package.json";
-
+//
 const isServer = typeof window === 'undefined';
 
 export class MoneriumClient {

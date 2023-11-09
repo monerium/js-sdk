@@ -1719,18 +1719,6 @@
     got "^11.8.5"
     os-filter-obj "^2.0.0"
 
-"@monerium/sdk-react-provider@*":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@monerium/sdk-react-provider/-/sdk-react-provider-0.0.5.tgz#f39b3763afeb36cb6c6afbe6030d7c99367ca43d"
-  integrity sha512-8R+/OSqxSfnSkBXXrYFM+EPr1RvFVFY1iqNO3SJmRlRDy6kXVKO9fx7Nt8nePn8fYqWHXZ1u8V/CuG/KMCxyqA==
-  dependencies:
-    "@monerium/sdk" "*"
-
-"@monerium/sdk@*":
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/@monerium/sdk/-/sdk-2.6.5.tgz#ccb84ef96420f008e6e67bd146d710ba204a0b8f"
-  integrity sha512-fEAJk2gNuirzub2IacICQ2khONeHpUD1LbEtq1RXBDPRusCmftDYufQRnv6oQBSw+prTHGnvzo2gU/0q4HszEw==
-
 "@next/env@13.4.1":
   version "13.4.1"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.4.1.tgz"

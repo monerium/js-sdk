@@ -51,7 +51,7 @@ jobs:
           echo '${{ steps.release.outputs.releases_created || false }}'
           echo '${{ toJson(steps.release.outputs) }}'
           echo '${{ steps.release.outputs.pr-branch }}'
-          echo '${{ steps.release.outputs.pr }}'
+          echo '${{ toJson(steps.release.outputs.pr)['.headBranchName'] }}'
           echo '${{ steps.release.outputs.sha }}'
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
