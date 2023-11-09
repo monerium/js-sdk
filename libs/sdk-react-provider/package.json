@@ -16,8 +16,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "@monerium/sdk": "*"
-  }
+  ]
 }
