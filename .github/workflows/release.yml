@@ -32,7 +32,7 @@ jobs:
         if: ${{ steps.release.outputs['packages/sdk--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t lint --base=origin/main --head=origin/release-please--branches--main
+        run: yarn nx affected -t lint --base=origin/main --head=${{ steps.release.outputs.pr.headBranchName }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created }}
@@ -41,7 +41,7 @@ jobs:
           echo '${{ steps.release.outputs.tag_name }}'
           echo '${{ steps.release.outputs.releases_created || false }}'
           echo '${{ toJson(steps.release.outputs) }}'
-          echo '${{ steps.release.outputs.pr }}'
+          echo '${{ steps.release.outputs.pr.headBranchName }}'
           echo '${{ steps.release.outputs.pr-branch }}'
           echo '${{ steps.release.outputs.pr.title }}'
           echo '${{ steps.release.outputs.sha }}'
