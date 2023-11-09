@@ -20,6 +20,9 @@ jobs:
           default-branch: main
       # The logic below handles the npm publication:
       - name: Checkout Repository
+        with:
+          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
+          fetch-depth: 0
         uses: actions/checkout@v3
         # these if statements ensure that a publication only occurs when
         # a new release is created:
@@ -32,7 +35,7 @@ jobs:
         if: ${{ steps.release.outputs['packages/sdk--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t lint --base=origin/main --head=${{ steps.release.outputs.pr.headBranchName }}
+        run: yarn nx affected -t lint --base=origin/main --head=${{ fromJson(steps.release.outputs.pr).headBranchName }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created }}
@@ -41,9 +44,9 @@ jobs:
           echo '${{ steps.release.outputs.tag_name }}'
           echo '${{ steps.release.outputs.releases_created || false }}'
           echo '${{ toJson(steps.release.outputs) }}'
-          echo '${{ steps.release.outputs.pr.headBranchName }}'
+          echo '${{ fromJson(steps.release.outputs.pr).headBranchName }}'
           echo '${{ steps.release.outputs.pr-branch }}'
-          echo '${{ steps.release.outputs.pr.title }}'
+          echo '${{ steps.release.outputs.pr }}'
           echo '${{ steps.release.outputs.sha }}'
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
