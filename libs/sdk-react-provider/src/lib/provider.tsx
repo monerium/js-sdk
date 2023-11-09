@@ -166,6 +166,8 @@ export const MoneriumProvider: FC<MoneriumProviderProps> = ({
     [monerium, isAuthorized, profile]
   );
 
+  //
+
   return (
     <MoneriumContext.Provider
       value={{
