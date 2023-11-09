@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.16](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.15...sdk-v2.6.16) (2023-11-09)
+
+
+### Bug Fixes
+
+* static files not deployed ([a1131d7](https://github.com/monerium/public-monorepo/commit/a1131d7ab988a93e41b7f3b65429b5aa27ff588e))
+
 ## [2.6.15](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.14...sdk-v2.6.15) (2023-11-09)
 
 
