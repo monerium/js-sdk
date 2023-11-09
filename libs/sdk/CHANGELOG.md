@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.10...sdk-v2.7.0) (2023-11-09)
+
+
+### Features
+
+* new functions added + arguments to class instance ([b5b8c5d](https://github.com/monerium/public-monorepo/commit/b5b8c5d3fbae6ce7a90569b74d887b81d9f3a336))
+
+
+### Bug Fixes
+
+* debug ([b2543eb](https://github.com/monerium/public-monorepo/commit/b2543eb222cbe74131377e164c28c3093b72be5f))
+* debug ([ea1bd38](https://github.com/monerium/public-monorepo/commit/ea1bd38c8f8f98cf65a9bcab615faa540a8b7324))
+* debug ([20e3ccb](https://github.com/monerium/public-monorepo/commit/20e3ccb3297e3bba02be86349a151b1bf0ed8f5c))
+* syntax ([f8cfbad](https://github.com/monerium/public-monorepo/commit/f8cfbad0fa536808ddc988cf9e6ca8aef5247ef7))
+* test ([2a612b1](https://github.com/monerium/public-monorepo/commit/2a612b1f93a59ec709c9f328c7ba4bc910971de9))
+* test ([0dfd8e1](https://github.com/monerium/public-monorepo/commit/0dfd8e1489db8096f1cb66a3816e410ddb996d64))
+* test: ([e122f61](https://github.com/monerium/public-monorepo/commit/e122f61e5f907785b6076bfda855c275bcfce1d6))
+* testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
+* testing affected ([60059eb](https://github.com/monerium/public-monorepo/commit/60059ebc035dccf1dcbb4eb64cf0eeb071020caf))
+* testing affected ([a10f49a](https://github.com/monerium/public-monorepo/commit/a10f49a4840218c9f5fa76463b3132401d0a23f4))
+
 ## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.12...sdk-v2.7.0) (2023-11-09)
 
 
