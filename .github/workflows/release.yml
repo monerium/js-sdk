@@ -29,6 +29,8 @@ jobs:
         # if: ${{ steps.release.outputs.releases_created }}
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: ${{ env.BASE }}
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
