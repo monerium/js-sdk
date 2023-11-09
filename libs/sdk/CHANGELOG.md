@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.12...sdk-v2.7.0) (2023-11-09)
+
+
+### Features
+
+* new functions added + arguments to class instance ([b5b8c5d](https://github.com/monerium/public-monorepo/commit/b5b8c5d3fbae6ce7a90569b74d887b81d9f3a336))
+
 ## [2.6.12](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.11...sdk-v2.6.12) (2023-11-09)
 
 
