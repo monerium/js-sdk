@@ -40,8 +40,8 @@ jobs:
       - run: echo "Release ${{ steps.release.outputs['libs/sdk--tag_name'] }} created for sdk."
         if: ${{ steps.release.outputs['libs/sdk--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
-      - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t publish --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk--tag_name'] }} ${{ steps.release.outputs['libs/sdk-react-provider--tag_name'] }}
+        run: yarn nx affected -t build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
