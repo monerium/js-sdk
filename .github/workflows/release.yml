@@ -27,6 +27,10 @@ jobs:
         # these if statements ensure that a publication only occurs when
         # a new release is created:
         # if: ${{ steps.release.outputs.releases_created }}
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: "main"
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
@@ -35,7 +39,7 @@ jobs:
         if: ${{ steps.release.outputs['packages/sdk--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t lint --base=origin/main --head=${{ fromJson(steps.release.outputs.pr).headBranchName }}
+        run: yarn nx affected -t lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created }}
@@ -44,7 +48,6 @@ jobs:
           echo '${{ steps.release.outputs.tag_name }}'
           echo '${{ steps.release.outputs.releases_created || false }}'
           echo '${{ toJson(steps.release.outputs) }}'
-          echo '${{ fromJson(steps.release.outputs.pr).headBranchName }}'
           echo '${{ steps.release.outputs.pr-branch }}'
           echo '${{ steps.release.outputs.pr }}'
           echo '${{ steps.release.outputs.sha }}'
