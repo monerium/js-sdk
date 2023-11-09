@@ -53,7 +53,7 @@ jobs:
         run: yarn nx docs sdk
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
       - name: Archive static artifacts
-        run: tar -cvf static.tar static
+        run: cd libs/sdk && tar -cvf static.tar static
         shell: bash
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
       - name: Upload static artifacts

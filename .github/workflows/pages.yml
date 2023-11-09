@@ -12,7 +12,7 @@ on:
   workflow_call:
     inputs:
       releases_created:
-        description: "Has package been released to NPM"
+        description: 'Has package been released to NPM'
         type: string
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
         with:
           name: static-artifacts
       - name: Extract artifacts
-        run: tar -xvf static.tar && mv static/* .
+        run: cd libs/sdk && tar -xvf static.tar && mv static/* .
         shell: bash
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
@@ -36,4 +36,4 @@ jobs:
           BRANCH: gh-pages-test # The branch the action should deploy to.
           FOLDER: . # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
-          COMMIT-MESSAGE: "Deployed SDK Docs & Code Coverage to Github Pages (https://monerium.github.io/sdk)"
+          COMMIT-MESSAGE: 'Deployed SDK Docs & Code Coverage to Github Pages (https://monerium.github.io/sdk)'
