@@ -40,7 +40,7 @@ jobs:
         run: |
           echo '${{ steps.release.outputs.tag_name }}'
           echo '${{ steps.release.outputs.releases_created || false }}'
-          echo '${{ steps.release.outputs }}'
+          echo '${{ toJson(steps.release.outputs) }}'
           echo '${{ steps.release.outputs.pr }}'
           echo '${{ steps.release.outputs.pr-branch }}'
           echo '${{ steps.release.outputs.pr.title }}'
