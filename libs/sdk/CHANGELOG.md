@@ -1,238 +1,181 @@
 # Changelog
 
-## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.10...sdk-v2.7.0) (2023-11-09)
-
-
-### Features
-
-* new functions added + arguments to class instance ([b5b8c5d](https://github.com/monerium/public-monorepo/commit/b5b8c5d3fbae6ce7a90569b74d887b81d9f3a336))
-
-
-### Bug Fixes
-
-* debug ([b2543eb](https://github.com/monerium/public-monorepo/commit/b2543eb222cbe74131377e164c28c3093b72be5f))
-* debug ([ea1bd38](https://github.com/monerium/public-monorepo/commit/ea1bd38c8f8f98cf65a9bcab615faa540a8b7324))
-* debug ([20e3ccb](https://github.com/monerium/public-monorepo/commit/20e3ccb3297e3bba02be86349a151b1bf0ed8f5c))
-* syntax ([f8cfbad](https://github.com/monerium/public-monorepo/commit/f8cfbad0fa536808ddc988cf9e6ca8aef5247ef7))
-* test ([2a612b1](https://github.com/monerium/public-monorepo/commit/2a612b1f93a59ec709c9f328c7ba4bc910971de9))
-* test ([0dfd8e1](https://github.com/monerium/public-monorepo/commit/0dfd8e1489db8096f1cb66a3816e410ddb996d64))
-* test: ([e122f61](https://github.com/monerium/public-monorepo/commit/e122f61e5f907785b6076bfda855c275bcfce1d6))
-* testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
-* testing affected ([60059eb](https://github.com/monerium/public-monorepo/commit/60059ebc035dccf1dcbb4eb64cf0eeb071020caf))
-* testing affected ([a10f49a](https://github.com/monerium/public-monorepo/commit/a10f49a4840218c9f5fa76463b3132401d0a23f4))
-
-## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.12...sdk-v2.7.0) (2023-11-09)
-
-
-### Features
-
-* new functions added + arguments to class instance ([b5b8c5d](https://github.com/monerium/public-monorepo/commit/b5b8c5d3fbae6ce7a90569b74d887b81d9f3a336))
-
 ## [2.6.12](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.11...sdk-v2.6.12) (2023-11-09)
 
-
 ### Bug Fixes
 
-* syntax ([f8cfbad](https://github.com/monerium/public-monorepo/commit/f8cfbad0fa536808ddc988cf9e6ca8aef5247ef7))
+- syntax ([f8cfbad](https://github.com/monerium/public-monorepo/commit/f8cfbad0fa536808ddc988cf9e6ca8aef5247ef7))
 
 ## [2.6.11](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.10...sdk-v2.6.11) (2023-11-09)
 
-
 ### Bug Fixes
 
-* debug ([b2543eb](https://github.com/monerium/public-monorepo/commit/b2543eb222cbe74131377e164c28c3093b72be5f))
+- debug ([b2543eb](https://github.com/monerium/public-monorepo/commit/b2543eb222cbe74131377e164c28c3093b72be5f))
 
 ## [2.6.10](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.9...sdk-v2.6.10) (2023-11-09)
 
-
 ### Bug Fixes
 
-* debug ([ea1bd38](https://github.com/monerium/public-monorepo/commit/ea1bd38c8f8f98cf65a9bcab615faa540a8b7324))
+- debug ([ea1bd38](https://github.com/monerium/public-monorepo/commit/ea1bd38c8f8f98cf65a9bcab615faa540a8b7324))
 
 ## [2.6.9](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.8...sdk-v2.6.9) (2023-11-09)
 
-
 ### Bug Fixes
 
-* debug ([20e3ccb](https://github.com/monerium/public-monorepo/commit/20e3ccb3297e3bba02be86349a151b1bf0ed8f5c))
+- debug ([20e3ccb](https://github.com/monerium/public-monorepo/commit/20e3ccb3297e3bba02be86349a151b1bf0ed8f5c))
 
 ## [2.6.8](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.7...sdk-v2.6.8) (2023-11-08)
 
-
 ### Bug Fixes
 
-* testing affected ([60059eb](https://github.com/monerium/public-monorepo/commit/60059ebc035dccf1dcbb4eb64cf0eeb071020caf))
+- testing affected ([60059eb](https://github.com/monerium/public-monorepo/commit/60059ebc035dccf1dcbb4eb64cf0eeb071020caf))
 
 ## [2.6.7](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.6...sdk-v2.6.7) (2023-11-08)
 
-
 ### Bug Fixes
 
-* testing affected ([a10f49a](https://github.com/monerium/public-monorepo/commit/a10f49a4840218c9f5fa76463b3132401d0a23f4))
+- testing affected ([a10f49a](https://github.com/monerium/public-monorepo/commit/a10f49a4840218c9f5fa76463b3132401d0a23f4))
 
 ## [2.6.6](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.5...sdk-v2.6.6) (2023-11-08)
 
-
 ### Bug Fixes
 
-* test: ([e122f61](https://github.com/monerium/public-monorepo/commit/e122f61e5f907785b6076bfda855c275bcfce1d6))
-* testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
+- test: ([e122f61](https://github.com/monerium/public-monorepo/commit/e122f61e5f907785b6076bfda855c275bcfce1d6))
+- testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
 
 ## [2.6.6](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.5...sdk-v2.6.6) (2023-11-08)
 
-
 ### Bug Fixes
 
-* testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
+- testing ([24389c9](https://github.com/monerium/public-monorepo/commit/24389c9f243671c548d957dc499689e58e0bc3f6))
 
 ## [2.6.5](https://github.com/monerium/sdk/compare/v2.6.4...v2.6.5) (2023-10-18)
 
-
 ### Bug Fixes
 
-* script to manually expand static file sidebar ([7b24240](https://github.com/monerium/sdk/commit/7b24240f642b80e05d2fd67665dbd6fe10f7aca5))
+- script to manually expand static file sidebar ([7b24240](https://github.com/monerium/sdk/commit/7b24240f642b80e05d2fd67665dbd6fe10f7aca5))
 
 ## [2.6.4](https://github.com/monerium/sdk/compare/v2.6.3...v2.6.4) (2023-10-18)
 
-
 ### Bug Fixes
 
-* **docs:** add links and fix sidebar not expading ([c8eab4a](https://github.com/monerium/sdk/commit/c8eab4a2006ea7068c442828c7e2e65eaedf8b71))
+- **docs:** add links and fix sidebar not expading ([c8eab4a](https://github.com/monerium/sdk/commit/c8eab4a2006ea7068c442828c7e2e65eaedf8b71))
 
 ## [2.6.3](https://github.com/monerium/sdk/compare/v2.6.2...v2.6.3) (2023-10-18)
 
-
 ### Bug Fixes
 
-* tests ([6be0014](https://github.com/monerium/sdk/commit/6be00148724942bdca74bbeea961b8b33bcd80f7))
+- tests ([6be0014](https://github.com/monerium/sdk/commit/6be00148724942bdca74bbeea961b8b33bcd80f7))
 
 ## [2.6.2](https://github.com/monerium/sdk/compare/v2.6.1...v2.6.2) (2023-10-18)
 
-
 ### Bug Fixes
 
-* add missing info from README [no-ci] ([600bda5](https://github.com/monerium/sdk/commit/600bda52f9d8b61aa47222ace5308d3087e674e5))
-* **docs:** add source code link to README ([c2a9294](https://github.com/monerium/sdk/commit/c2a9294f49e60ba9fd9373d94ec6069b6b559fb0))
-* revert changes to action ([36eada9](https://github.com/monerium/sdk/commit/36eada92b89b9bf1de0659f74479d27b58697975))
-* update docs on every push to main ([e0f57e6](https://github.com/monerium/sdk/commit/e0f57e61312a5fce0d02608eed6fc7c5aaba5b09))
+- add missing info from README [no-ci] ([600bda5](https://github.com/monerium/sdk/commit/600bda52f9d8b61aa47222ace5308d3087e674e5))
+- **docs:** add source code link to README ([c2a9294](https://github.com/monerium/sdk/commit/c2a9294f49e60ba9fd9373d94ec6069b6b559fb0))
+- revert changes to action ([36eada9](https://github.com/monerium/sdk/commit/36eada92b89b9bf1de0659f74479d27b58697975))
+- update docs on every push to main ([e0f57e6](https://github.com/monerium/sdk/commit/e0f57e61312a5fce0d02608eed6fc7c5aaba5b09))
 
 ## [2.6.1](https://github.com/monerium/sdk/compare/v2.6.0...v2.6.1) (2023-09-11)
 
-
 ### Bug Fixes
 
-* add info how to set environment ([c803cc5](https://github.com/monerium/sdk/commit/c803cc579ea11006ab845d4a4790e2a9bffae0b0))
+- add info how to set environment ([c803cc5](https://github.com/monerium/sdk/commit/c803cc579ea11006ab845d4a4790e2a9bffae0b0))
 
 ## [2.6.0](https://github.com/monerium/sdk/compare/v2.5.2...v2.6.0) (2023-07-19)
 
-
 ### Features
 
-* removed Chain and Network enum ([600a634](https://github.com/monerium/sdk/commit/600a6348f4f6ce0b3f2cc472c807520620bc0d60))
-
+- removed Chain and Network enum ([600a634](https://github.com/monerium/sdk/commit/600a6348f4f6ce0b3f2cc472c807520620bc0d60))
 
 ### Bug Fixes
 
-* constants typed import ([600a634](https://github.com/monerium/sdk/commit/600a6348f4f6ce0b3f2cc472c807520620bc0d60))
+- constants typed import ([600a634](https://github.com/monerium/sdk/commit/600a6348f4f6ce0b3f2cc472c807520620bc0d60))
 
 ## [2.5.2](https://github.com/monerium/sdk/compare/v2.5.1...v2.5.2) (2023-07-05)
 
-
 ### Bug Fixes
 
-* add state to Account type, closes [#96](https://github.com/monerium/sdk/issues/96) ([5693146](https://github.com/monerium/sdk/commit/5693146d8951e9e7024dcd1f8c262707ade8f642))
-* getBalances always returns an array, closes [#98](https://github.com/monerium/sdk/issues/98) ([144b1f9](https://github.com/monerium/sdk/commit/144b1f944c78269bf9ebed72a5da046511a15aea))
+- add state to Account type, closes [#96](https://github.com/monerium/sdk/issues/96) ([5693146](https://github.com/monerium/sdk/commit/5693146d8951e9e7024dcd1f8c262707ade8f642))
+- getBalances always returns an array, closes [#98](https://github.com/monerium/sdk/issues/98) ([144b1f9](https://github.com/monerium/sdk/commit/144b1f944c78269bf9ebed72a5da046511a15aea))
 
 ## [2.5.1](https://github.com/monerium/sdk/compare/v2.5.0...v2.5.1) (2023-06-15)
 
-
 ### Bug Fixes
 
-* extend timeout on place order test ([0a81449](https://github.com/monerium/sdk/commit/0a81449e201df00045694af693c866b801ddea32))
+- extend timeout on place order test ([0a81449](https://github.com/monerium/sdk/commit/0a81449e201df00045694af693c866b801ddea32))
 
 ## [2.5.0](https://github.com/monerium/sdk/compare/v2.4.1...v2.5.0) (2023-06-15)
 
-
 ### Features
 
-* expose rfc3339 function ([f9e5bec](https://github.com/monerium/sdk/commit/f9e5bec6fbd2209f58b240be90d833f8fdcaae0a))
-
+- expose rfc3339 function ([f9e5bec](https://github.com/monerium/sdk/commit/f9e5bec6fbd2209f58b240be90d833f8fdcaae0a))
 
 ### Bug Fixes
 
-* should be client.codeVerifier ([46c986a](https://github.com/monerium/sdk/commit/46c986a246cf4623ce283b2e8b2f9bc2c4c9ad35))
+- should be client.codeVerifier ([46c986a](https://github.com/monerium/sdk/commit/46c986a246cf4623ce283b2e8b2f9bc2c4c9ad35))
 
 ## [2.4.1](https://github.com/monerium/sdk/compare/v2.4.0...v2.4.1) (2023-05-10)
 
-
 ### Bug Fixes
 
-* placeOrderMessage parameters, should take two arguments instead of one nested ([5c32da0](https://github.com/monerium/sdk/commit/5c32da01f3a0018aa69f00511f63fba8c3d7ec8b))
+- placeOrderMessage parameters, should take two arguments instead of one nested ([5c32da0](https://github.com/monerium/sdk/commit/5c32da01f3a0018aa69f00511f63fba8c3d7ec8b))
 
 ## [2.4.0](https://github.com/monerium/sdk/compare/v2.3.0...v2.4.0) (2023-05-09)
 
-
 ### Features
 
-* kind always redeem from place order [#87](https://github.com/monerium/sdk/issues/87) ([#88](https://github.com/monerium/sdk/issues/88)) ([850921e](https://github.com/monerium/sdk/commit/850921ed0aa8d36e180ee7c1df439e04f5d7085b))
-
+- kind always redeem from place order [#87](https://github.com/monerium/sdk/issues/87) ([#88](https://github.com/monerium/sdk/issues/88)) ([850921e](https://github.com/monerium/sdk/commit/850921ed0aa8d36e180ee7c1df439e04f5d7085b))
 
 ### Bug Fixes
 
-* custom urlEncoder for x-www-forms so the package works for Metamask snapa ([#91](https://github.com/monerium/sdk/issues/91)) ([8375164](https://github.com/monerium/sdk/commit/83751645565c4b7054f8aabffaa8f91eea8d5caf))
-* lint ([82f8f7c](https://github.com/monerium/sdk/commit/82f8f7c0192b235c4e0e584a25d52490e1575aa3))
-* vscode cant detect the configs in nested folder ([#89](https://github.com/monerium/sdk/issues/89)) ([398dcf1](https://github.com/monerium/sdk/commit/398dcf1513de86a7c3949493e3728aac746349fa))
-* we only support EUR for now + adjust placeOrder request type ([1c54932](https://github.com/monerium/sdk/commit/1c549321192c115947f1ce574c97cf618353a6ef))
-* we only support EUR for now + adjust placeOrder request type ([07f801a](https://github.com/monerium/sdk/commit/07f801a1088bf2df014af549214199bb17ee8f51))
-
+- custom urlEncoder for x-www-forms so the package works for Metamask snapa ([#91](https://github.com/monerium/sdk/issues/91)) ([8375164](https://github.com/monerium/sdk/commit/83751645565c4b7054f8aabffaa8f91eea8d5caf))
+- lint ([82f8f7c](https://github.com/monerium/sdk/commit/82f8f7c0192b235c4e0e584a25d52490e1575aa3))
+- vscode cant detect the configs in nested folder ([#89](https://github.com/monerium/sdk/issues/89)) ([398dcf1](https://github.com/monerium/sdk/commit/398dcf1513de86a7c3949493e3728aac746349fa))
+- we only support EUR for now + adjust placeOrder request type ([1c54932](https://github.com/monerium/sdk/commit/1c549321192c115947f1ce574c97cf618353a6ef))
+- we only support EUR for now + adjust placeOrder request type ([07f801a](https://github.com/monerium/sdk/commit/07f801a1088bf2df014af549214199bb17ee8f51))
 
 ### Miscellaneous
 
-* add a comment to explain how to use the Network type ([c913224](https://github.com/monerium/sdk/commit/c9132242d2f977524ba6467210344b1c8dc51e85))
-* add info about sdks to Readme ([ad10488](https://github.com/monerium/sdk/commit/ad10488ce634787bee3b1eab8be6b8d78f56f834))
+- add a comment to explain how to use the Network type ([c913224](https://github.com/monerium/sdk/commit/c9132242d2f977524ba6467210344b1c8dc51e85))
+- add info about sdks to Readme ([ad10488](https://github.com/monerium/sdk/commit/ad10488ce634787bee3b1eab8be6b8d78f56f834))
 
 ## [2.3.0](https://github.com/monerium/sdk/compare/v2.2.3...v2.3.0) (2023-04-30)
 
-
 ### ⚠ BREAKING CHANGES
 
-* '@monerium/sdk' now exports Network and Chain as types, previously enums </br> Enums are now exported under 'constants' </br> import { constants } from '@monerium/sdk'; </br> const { Network } = constants; </br></br> new Network type takes two optional params for Chain and Environmant</br> import { Network } from '@monerium/sdk'</br></br> // is valid </br> const network: Network<'gnosis','production> = 'mainnet';</br> const network: Network<'gnosis','sandbox> = 'chiado';</br> const network: Network<'gnosis',> = 'chiado';</br> const network: Network = 'chiado';</br></br> // is invalid </br> const network: Network<'gnosis','sandbox> = 'mainnet';</br> const network: Network<'gnosis'> = 'goerli';</br>
+- '@monerium/sdk' now exports Network and Chain as types, previously enums </br> Enums are now exported under 'constants' </br> import { constants } from '@monerium/sdk'; </br> const { Network } = constants; </br></br> new Network type takes two optional params for Chain and Environmant</br> import { Network } from '@monerium/sdk'</br></br> // is valid </br> const network: Network<'gnosis','production> = 'mainnet';</br> const network: Network<'gnosis','sandbox> = 'chiado';</br> const network: Network<'gnosis',> = 'chiado';</br> const network: Network = 'chiado';</br></br> // is invalid </br> const network: Network<'gnosis','sandbox> = 'mainnet';</br> const network: Network<'gnosis'> = 'goerli';</br>
 
 ### Features
 
-* expose helper to create place order message ([#85](https://github.com/monerium/sdk/issues/85)) ([b124370](https://github.com/monerium/sdk/commit/b1243702c534a6d40e0ce657ff8db9a6f55546a5))
-* network types with optional chain and env type params ([#82](https://github.com/monerium/sdk/issues/82)) ([154d626](https://github.com/monerium/sdk/commit/154d626798150640ac2ed331b98029a18984555c))
-* refactor, improve and test fetch ([#86](https://github.com/monerium/sdk/issues/86)) ([26a8ceb](https://github.com/monerium/sdk/commit/26a8ceb78ec38553709afa2add0108ee3e10e125))
-
+- expose helper to create place order message ([#85](https://github.com/monerium/sdk/issues/85)) ([b124370](https://github.com/monerium/sdk/commit/b1243702c534a6d40e0ce657ff8db9a6f55546a5))
+- network types with optional chain and env type params ([#82](https://github.com/monerium/sdk/issues/82)) ([154d626](https://github.com/monerium/sdk/commit/154d626798150640ac2ed331b98029a18984555c))
+- refactor, improve and test fetch ([#86](https://github.com/monerium/sdk/issues/86)) ([26a8ceb](https://github.com/monerium/sdk/commit/26a8ceb78ec38553709afa2add0108ee3e10e125))
 
 ### Miscellaneous
 
-* release 2.3.0 ([bff6ece](https://github.com/monerium/sdk/commit/bff6ece14c0b7b7a362b21df0b024b0a6a8f6678))
+- release 2.3.0 ([bff6ece](https://github.com/monerium/sdk/commit/bff6ece14c0b7b7a362b21df0b024b0a6a8f6678))
 
 ## [2.2.3](https://github.com/monerium/sdk/compare/v2.2.2...v2.2.3) (2023-04-28)
 
-
 ### Bug Fixes
 
-* commonjs bundle not properly referenced in package.json ([85d4b19](https://github.com/monerium/sdk/commit/85d4b19c054102b48b9cd55c55b498965e9db7b6))
-
+- commonjs bundle not properly referenced in package.json ([85d4b19](https://github.com/monerium/sdk/commit/85d4b19c054102b48b9cd55c55b498965e9db7b6))
 
 ### Miscellaneous
 
-* add version to action step ([804d0d8](https://github.com/monerium/sdk/commit/804d0d843b809aad960f224a0602edd3359454fc))
+- add version to action step ([804d0d8](https://github.com/monerium/sdk/commit/804d0d843b809aad960f224a0602edd3359454fc))
 
 ## [2.2.2](https://github.com/monerium/sdk/compare/v2.2.1...v2.2.2) (2023-04-26)
 
-
 ### Bug Fixes
 
-* coverage output path ([675b7cd](https://github.com/monerium/sdk/commit/675b7cd3536a320dcbe915bfeb077609bfa834b1))
-
+- coverage output path ([675b7cd](https://github.com/monerium/sdk/commit/675b7cd3536a320dcbe915bfeb077609bfa834b1))
 
 ### Miscellaneous
 
-* archive build and reuse for deploying static files. ([#80](https://github.com/monerium/sdk/issues/80)) ([cfc34d8](https://github.com/monerium/sdk/commit/cfc34d80f2db547505c34b55ab3b2a7d0a37aae5))
-* move .prettierignore into configs folder and add some rules ([171b0b3](https://github.com/monerium/sdk/commit/171b0b3c5dc807f0bec0cc9220b390302fdd98e9))
+- archive build and reuse for deploying static files. ([#80](https://github.com/monerium/sdk/issues/80)) ([cfc34d8](https://github.com/monerium/sdk/commit/cfc34d80f2db547505c34b55ab3b2a7d0a37aae5))
+- move .prettierignore into configs folder and add some rules ([171b0b3](https://github.com/monerium/sdk/commit/171b0b3c5dc807f0bec0cc9220b390302fdd98e9))
 
 ## [2.2.1](https://github.com/monerium/sdk/compare/v2.2.0...v2.2.1) (2023-04-26)
 
