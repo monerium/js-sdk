@@ -49,7 +49,7 @@ jobs:
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
 
       - name: Build documentation
-        run: yarn docs
+        run: yarn nx docs sdk
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
       - name: Archive static artifacts
         run: tar -cvf static.tar static
