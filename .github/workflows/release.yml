@@ -36,7 +36,7 @@ jobs:
         # for security reasons, use --check-cache if accepting PRs from third-parties.
         # if: ${{ steps.release.outputs.releases_created }}
       - name: Publish NPM package ${{ steps.release.outputs.tag_name }}
-        run: yarn nx affected -t test --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+        run: yarn nx affected -t build --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
       - run: echo "Release ${{ steps.release.outputs['libs/sdk--tag_name'] }} created for sdk."
         if: ${{ steps.release.outputs['libs/sdk--release_created'] }}
       # Conditionally publish packages based on changes in their respective dist directories
