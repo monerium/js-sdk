@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.1](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.0...sdk-v2.7.1) (2023-11-09)
+
+
+### Bug Fixes
+
+* lol ([630cb9f](https://github.com/monerium/public-monorepo/commit/630cb9fa3f4d7efa363b7fd9079c4e5e4e26bdd3))
+
 ## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.10...sdk-v2.7.0) (2023-11-09)
 
 
