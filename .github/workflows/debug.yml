@@ -7,9 +7,14 @@ on:
 
 jobs:
   build-test:
-    name: "Build & test"
+    name: 'Build & test'
     runs-on: ubuntu-latest
     steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
       - uses: actions/checkout@v3
         # these if statements ensure that a publication only occurs when
         # a new release is created:
