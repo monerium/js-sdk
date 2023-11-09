@@ -70,6 +70,7 @@ jobs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
       package_names: ${{ steps.get-package-names.outputs.package_names }}
+      sdk_path: ${{ steps.release.outputs['libs/sdk--path'] }}
 
   echo:
     needs: [release-please]
@@ -84,5 +85,5 @@ jobs:
     needs: [release-please]
     uses: "./.github/workflows/pages.yml"
     with:
-      releases_created: ${{ needs.release-please.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' || 'false' }}
+      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs['libs/sdk--path'] == 'libs/sdk' || 'false' }}
     secrets: inherit
