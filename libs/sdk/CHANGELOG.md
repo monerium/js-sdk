@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.15](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.14...sdk-v2.6.15) (2023-11-09)
+
+
+### Bug Fixes
+
+* trigger sdk ([ee1b950](https://github.com/monerium/public-monorepo/commit/ee1b9502c61655e5f0771827fdd116b58c748834))
+
 ## [2.6.14](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.13...sdk-v2.6.14) (2023-11-09)
 
 
