@@ -98,6 +98,7 @@ export class MoneriumClient {
       }
     }
   }
+
   /**
    * Construct the url to the authorization code flow,
    * Code Verifier needed for the code challenge is stored in session storage

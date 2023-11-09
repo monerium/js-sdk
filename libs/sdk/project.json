@@ -12,14 +12,18 @@
       }
     },
     "prepublish": {
-      "command": "echo",
-      "dependsOn": ["build", "test", "lint"]
+      "dependsOn": ["build", "test", "lint"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm pack --dry-run",
+        "cwd": "libs/sdk"
+      }
     },
     "publish": {
       "dependsOn": ["prepublish"],
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm pack --dry-run",
+        "command": "npm publish --access public",
         "cwd": "libs/sdk"
       }
     },
