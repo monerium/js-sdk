@@ -29,10 +29,6 @@
   "dependencies": {
     "crypto-js": "^4.2.0"
   },
-  "devDependencies": {
-    "typedoc": "0.23.23",
-    "typedoc-theme-hierarchy": "^3.2.1"
-  },
   "scripts": {
     "build:watch": "yarn build:main --watch",
     "docs": "yarn typedoc --options docs/typedoc.json && node docs/editStatic.js",
