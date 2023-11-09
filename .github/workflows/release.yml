@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: static-artifacts
-          path: static.tar
+          path: libs/sdk/static.tar
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk'}}
       - name: Debug
         run: |
@@ -83,11 +83,12 @@ jobs:
       - name: Debug
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
+          echo '${{ needs.release-please.outputs['libs/sdk--release_created'] || false }}'
 
   deploy-static:
     name: Trigger static pages deploy
     needs: [release-please]
     uses: './.github/workflows/pages.yml'
     with:
-      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs['libs/sdk--path'] == 'libs/sdk' || 'false' }}
+      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs['libs/sdk--release_created'] || 'false' }}
     secrets: inherit
