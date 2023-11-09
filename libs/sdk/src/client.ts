@@ -41,6 +41,8 @@ import {
 
 // import pjson from "../package.json";
 
+// test
+
 const isServer = typeof window === 'undefined';
 
 export class MoneriumClient {
