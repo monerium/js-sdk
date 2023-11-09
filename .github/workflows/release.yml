@@ -3,7 +3,7 @@ name: Release Please
 on:
   push:
     branches:
-      - pass
+      - main
 permissions:
   contents: write
   pull-requests: write
@@ -47,7 +47,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
-
+      - run: cd libs/sdk && yarn install
+        if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
       - name: Build documentation
         run: yarn nx docs sdk
         if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
@@ -72,7 +73,7 @@ jobs:
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
-      package_names: ${{ steps.get-package-names.outputs.package_names }}
+      package_names: ${{ steps.release.outputs.package_names }}
       sdk_path: ${{ steps.release.outputs['libs/sdk--path'] }}
 
   echo:
