@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.19](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.18...sdk-v2.6.19) (2023-11-10)
+
+
+### Bug Fixes
+
+* test deploy ([1a3e311](https://github.com/monerium/public-monorepo/commit/1a3e311fdc7bde2f17390e4cdb3f0a48859e5cf9))
+
 ## [2.6.18](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.17...sdk-v2.6.18) (2023-11-10)
 
 
