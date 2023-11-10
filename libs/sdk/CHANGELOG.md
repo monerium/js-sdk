@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.20](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.19...sdk-v2.6.20) (2023-11-10)
+
+
+### Bug Fixes
+
+* add example, fix sdk for backwards compatibility and update README ([6992417](https://github.com/monerium/public-monorepo/commit/6992417e44b442a06b1d65f88d588d17e71b4562))
+* continue on error gh-pages ([d033048](https://github.com/monerium/public-monorepo/commit/d033048a490390815ef17dad45b526b04898c2ae))
+
 ## [2.6.19](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.18...sdk-v2.6.19) (2023-11-10)
 
 
