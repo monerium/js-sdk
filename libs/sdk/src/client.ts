@@ -495,8 +495,11 @@ export class MoneriumClient {
   /**
    * @deprecated since v2.6.4, use {@link authorize} instead.
    */
-  getAuthFlowURI = (args: PKCERequestArgs): string =>
-    getAuthFlowUrlAndStoreCodeVerifier(this.#env.api, args);
+  getAuthFlowURI = (args: PKCERequestArgs): string => {
+    const url = getAuthFlowUrlAndStoreCodeVerifier(this.#env.api, args);
+    this.codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER) as string;
+    return url;
+  };
 
   /**
    *  @deprecated since v2.0.7, use {@link getAuthFlowURI} instead.

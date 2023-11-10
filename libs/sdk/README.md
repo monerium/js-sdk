@@ -51,40 +51,29 @@ yarn add @monerium/sdk
 
 We recommend starting in the [Developer Portal](https://monerium.dev/docs/welcome). There you will learn more about `client_id`'s and ways of authenticating.
 
-#### Import the SDK and initialize a client
+#### Initialize and authenticate using Client Credentials
+
+> Client Credentials is used when there's no need for user interaction, and the system-to-system interaction requires authentication.
 
 ```ts
 import { MoneriumClient } from '@monerium/sdk';
+// Initialize the client with credentials
+const monerium = new MoneriumClient({
+  environment: 'sandbox',
+  clientId: 'your_client_credentials_uuid', // replace with your client ID
+  clientSecret: 'your_client_secret', // replace with your client secret
+});
 
-// Initialize the client. By default, it uses the sandbox environment.
-// For using the production environment, replace 'sandbox' with 'production'.
-const client = new MoneriumClient('sandbox');
+// Retrieve authentication data after successful authentication.
+await monerium.getAuthContext();
+
+// Access tokens are now available for use.
+const { access_token, refresh_token } = monerium.bearerProfile as BearerProfile;
 ```
 
 Interfaces:
 
 - {@link client.MoneriumClient}
-
-#### Authenticate using Client Credentials
-
-> Client Credentials is used when there's no need for user interaction, and the system-to-system interaction requires authentication.
-
-```ts
-(await client.auth({
-  client_id: 'your_client_credentials_uuid', // replace with your client ID
-  client_secret: 'your_client_secret', // replace with your client secret
-})) as ClientCredentialsRequest;
-
-// Retrieve authentication data after successful authentication.
-await client.getAuthContext();
-
-// Access tokens are now available for use.
-const { access_token, refresh_token } = client.bearerProfile as BearerProfile;
-```
-
-Interfaces:
-
-- {@link types.ClientCredentialsRequest}
 - {@link types.BearerProfile}
 
 API documentation:
@@ -92,54 +81,66 @@ API documentation:
 - [/auth/token](https://monerium.dev/api-docs#operation/auth-token)
 - [/auth/context](https://monerium.dev/api-docs#operation/auth-context)
 
-#### Authenticate using Authorization Code Flow with PKCE
+#### Initialize and authenticate using Authorization Code Flow with PKCE
 
 > Authorization Code Flow with PKCE is used for apps where direct user interaction is involved, and the application is running on an environment where the confidentiality of a secret cannot be safely maintained. It allows the application to authorize users without handling their passwords and mitigates the additional risk involved in this sort of delegation.
 
 First you have to navigate the user to the Monerium authentication flow. This can be done by generating a URL and redirecting the user to it. After the user has authenticated, Monerium will redirect back to your specified URI with a code. You can then finalize the authentication process by exchanging the code for access and refresh tokens.
 
 ```ts
-// Generate the URL where users will be redirected to authenticate.
-let authFlowUrl = client.getAuthFlowURI({
-  client_id: 'your_client_authflow_uuid', // replace with your auth flow client ID
-  redirect_uri: 'http://your-webpage.com/monerium-integration', // specify your redirect URI
-  // Optional parameters for automatic wallet selection (if applicable)
-  network: 'mumbai', // specify the network
-  chain: 'polygon', // specify the chain
-  address: '0xValidAddress72413Fa92980B889A1eCE84dD', // user wallet address
-  signature: '0xValidSignature0df2b6c9e0fc067ab29bdbf322bec30aad7c46dcd97f62498a91ef7795957397e0f49426e000b0f500c347219ddd98dc5080982563055e918031c', // user wallet signature
-});
+import { MoneriumClient } from '@monerium/sdk';
 
-// Store the code verifier securely between requests.
-window.localStorage.setItem('myCodeVerifier', client.codeVerifier);
+export function App() {
+  const [authCtx, setAuthCtx] = useState<AuthContext | null>(null);
+  const [monerium, setMonerium] = useState<MoneriumClient>();
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
-// Redirect the user to the Monerium authentication flow.
-window.location.replace(authFlowUrl);
-```
+  useEffect(() => {
+    const sdk = new MoneriumClient({
+      environment: 'sandbox',
+      clientId: 'f99e629b-6dca-11ee-8aa6-5273f65ed05b',
+      redirectUrl: 'http://localhost:4200',
+    });
+    setMonerium(sdk);
+  }, []);
 
-```ts
-// After user authentication, Monerium redirects back to your specified URI with a code.
-// Capture this code from the URL and proceed with the authentication.
+  useEffect(() => {
+    const connect = async () => {
+      if (monerium) {
+        setIsAuthorized(await monerium.connect());
+      }
+    };
 
-// Extract the 'code' URL parameter.
-const authCode = new URLSearchParams(window.location.search).get('code');
+    connect();
 
-// Retrieve the stored code verifier.
-const retrievedCodeVerifier = window.localStorage.getItem('myCodeVerifier');
+    return () => {
+      if (monerium) {
+        monerium.disconnect();
+      }
+    };
+  }, [monerium]);
 
-// Finalize the authentication process.
-(await client.auth({
-  client_id: 'your_client_authflow_uuid', // replace with your client ID
-  code: authCode,
-  code_verifier: retrievedCodeVerifier,
-  redirect_url: 'http://your-webpage.com/monerium-integration', // ensure this matches the redirect_uri used initially
-})) as AuthCodeRequest;
+  useEffect(() => {
+    const fetchData = async () => {
+      if (monerium && isAuthorized) {
+        try {
+          setAuthCtx(await monerium.getAuthContext());
+        } catch (err) {
+          console.error('Error fetching data:', err);
+        }
+      }
+    };
+    fetchData();
+  }, [monerium, isAuthorized]);
 
-// Confirm the user is authenticated and retrieve the authentication data.
-await client.getAuthContext();
+  return (
+    <div>
+      {!isAuthorized && <button onClick={() => monerium?.authorize()}>Connect</button>}
 
-// Your access and refresh tokens are now available.
-const { access_token, refresh_token } = client.bearerProfile as BearerProfile;
+      <p>{authCtx?.name || authCtx?.email}</p>
+    </div>
+  );
+}
 ```
 
 Interfaces:
@@ -157,13 +158,13 @@ API documentation:
 
 ```ts
 // Get all profiles for the authenticated user.
-const authCtx: AuthContext = await client.getAuthContext();
+const authCtx: AuthContext = await monerium.getAuthContext();
 
 // Fetching all accounts for a specific profile
-const { id: profileId, accounts }: Profile = await client.getProfile(authCtx.profiles[0].id);
+const { id: profileId, accounts }: Profile = await monerium.getProfile(authCtx.profiles[0].id);
 
 // Fetching all balances for a specific profile
-const balances: Balances = await client.getBalances(profileId);
+const balances: Balances = await monerium.getBalances(profileId);
 ```
 
 Interfaces:
@@ -183,7 +184,7 @@ API documentation:
 Get the contract addresses of EURe tokens.
 
 ```ts
-const tokens: Token[] = await client.getTokens();
+const tokens: Token[] = await monerium.getTokens();
 ```
 
 Interfaces:
@@ -214,7 +215,7 @@ const signature = await walletClient.signMessage({
 })
 
 // Link a new address to Monerium and create accounts for ethereum and gnosis.
-await client.linkAddress(profileId, {
+await monerium.linkAddress(profileId, {
   address: '0xUserAddress72413Fa92980B889A1eCE84dD', // user wallet address
   message: LINK_MESSAGE
   signature,
@@ -237,7 +238,7 @@ API documentation:
 
 ```ts
 // Get orders for a specific profile
-const orders: Order[] = await client.getOrders(profileId);
+const orders: Order[] = await monerium.getOrders(profileId);
 ```
 
 ```ts
@@ -260,7 +261,7 @@ const signature = await walletClient.signMessage({
 });
 
 // Place the order
-const order = await client.placeOrder({
+const order = await monerium.placeOrder({
   amount,
   signature,
   address: '0xUserAddress72413Fa92980B889A1eCE84dD', // user wallet address
