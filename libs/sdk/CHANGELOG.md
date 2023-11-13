@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.20...sdk-v2.7.0) (2023-11-13)
+
+
+### Bug Fixes
+
+* props to auto-link ([ce85efd](https://github.com/monerium/public-monorepo/commit/ce85efd534cfcac7fb9e7804b733641aeb752f4f))
+
 ## [2.6.20](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.19...sdk-v2.6.20) (2023-11-10)
 
 
