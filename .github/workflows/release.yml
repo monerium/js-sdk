@@ -15,6 +15,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
+          release-type: node
           command: manifest
           token: ${{secrets.GITHUB_TOKEN}}
           default-branch: main
@@ -33,6 +34,10 @@ jobs:
         with:
           main-branch-name: ${{ env.BASE }}
 
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+          always-auth: true
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
