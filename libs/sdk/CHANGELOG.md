@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.0...sdk-v2.7.0) (2023-11-13)
+
+
+### Bug Fixes
+
+* publish not working ([50a2a05](https://github.com/monerium/public-monorepo/commit/50a2a0583c03ef7a66a605c8215f72256192b8e2))
+
 ## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.6.20...sdk-v2.7.0) (2023-11-13)
 
 
