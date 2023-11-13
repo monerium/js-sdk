@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.5...sdk-react-provider-v0.0.6) (2023-11-13)
+
+
+### Bug Fixes
+
+* publish not working ([50a2a05](https://github.com/monerium/public-monorepo/commit/50a2a0583c03ef7a66a605c8215f72256192b8e2))
+
 ## [0.0.5](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.5...sdk-react-provider-v0.0.5) (2023-11-09)
 
 
