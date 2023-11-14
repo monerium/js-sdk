@@ -7,7 +7,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to sdk-example-nextjs!</title>
+        <title>Welcome to sdk-provider-example-nextjs!</title>
       </Head>
       <main className="app">
         <MoneriumProvider

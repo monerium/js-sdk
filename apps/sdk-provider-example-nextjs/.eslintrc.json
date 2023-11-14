@@ -18,7 +18,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/sdk-example-nextjs/pages"
+          "apps/sdk-provider-example-nextjs/pages"
         ]
       }
     },

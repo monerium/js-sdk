@@ -52,9 +52,9 @@ export function App() {
         <button
           onClick={() =>
             monerium?.authorize({
-              address: '0xValidAddress72413Fa92980B889A1eCE84dD',
-              signature: '0x',
-              chainId: 137,
+              // address: '0xValidAddress72413Fa92980B889A1eCE84dD',
+              // signature: '0x',
+              // chainId: 137,
             })
           }
         >
