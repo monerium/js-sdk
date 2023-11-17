@@ -224,6 +224,7 @@ export class MoneriumClient {
         if (!isServer) {
           sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
           sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+          cleanQueryString();
         }
         throw new Error(err?.message);
         // if ((params as AuthCodeRequest).code) {

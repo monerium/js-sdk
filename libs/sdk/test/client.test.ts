@@ -504,3 +504,13 @@ describe('MoneriumClient', () => {
 //   // const document = client.uploadSupportingDocument();
 //   // assertObjectMatch(document, {});
 // });
+describe('disconnect()', () => {
+  it('should remove the codeVerifier from the storage', async () => {
+    const sessionStorageSpy = jest.spyOn(window.sessionStorage, 'removeItem');
+    const client = new MoneriumClient();
+
+    await client.disconnect();
+
+    expect(sessionStorageSpy).toHaveBeenCalledWith(STORAGE_CODE_VERIFIER);
+  });
+});
