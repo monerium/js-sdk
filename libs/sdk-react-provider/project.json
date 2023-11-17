@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/sdk-react-provider/src",
   "projectType": "library",
+  "implicitDependencies": ["sdk"],
   "tags": [],
   "targets": {
     "lint": {
