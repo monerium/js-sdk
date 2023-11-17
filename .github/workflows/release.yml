@@ -97,6 +97,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Yarn install
+        run: yarn install --immutable --immutable-cache
+        if: ${{ github.event.inputs.runArchiveStatic == 'true' }}
       - name: Install SDK dependencies
         run: cd libs/sdk && yarn install
       # Conditionally publish packages based on changes in their respective dist directories
