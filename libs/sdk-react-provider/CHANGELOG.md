@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.8...sdk-react-provider-v0.0.9) (2023-11-17)
+
+
+### Bug Fixes
+
+* **react-provider:** force version update ([c2895de](https://github.com/monerium/public-monorepo/commit/c2895de0a0a019bdfb31ca3b0e52ebd7fa7348ca))
+
 ## [0.0.8](https://github.com/monerium/public-monorepo/compare/sdk-react-provider-v0.0.8...sdk-react-provider-v0.0.8) (2023-11-17)
 
 
