@@ -97,6 +97,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        if: ${{ github.event.inputs.runArchiveStatic == 'true' }}
       - name: Yarn install
         run: yarn install --immutable --immutable-cache
         if: ${{ github.event.inputs.runArchiveStatic == 'true' }}
@@ -113,10 +114,9 @@ jobs:
         with:
           name: static-artifacts
           path: libs/sdk/static.tar
+
   deploy-static:
     name: Trigger static pages deploy
-    needs: [archive-static, release-please]
+    needs: [archive-static]
     uses: './.github/workflows/pages.yml'
-    with:
-      releases_created: ${{ needs.release-please.outputs.sdk_releases_created || 'false' }}
     secrets: inherit

@@ -8,19 +8,13 @@ name: Deploy to Github pages
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  # Allows other workflows to trigger this one
-  workflow_call:
-    inputs:
-      releases_created:
-        description: 'Has package been released to NPM'
-        type: string
+
 permissions:
   contents: write
 
 jobs:
   docs:
     name: Deploy to Github pages
-    if: ${{ inputs.releases_created == 'true' }}
     runs-on: ubuntu-latest
     continue-on-error: true # while the SDK_GH_ACCESS_TOKEN is not approved
     steps:
