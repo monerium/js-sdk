@@ -64,6 +64,8 @@ const monerium = new MoneriumClient({
   clientSecret: 'your_client_secret', // replace with your client secret
 });
 
+await monerium.getAccess();
+
 // Retrieve authentication data after successful authentication.
 await monerium.getAuthContext();
 
@@ -107,7 +109,7 @@ export function App() {
   useEffect(() => {
     const connect = async () => {
       if (monerium) {
-        setIsAuthorized(await monerium.connect());
+        setIsAuthorized(await monerium.getAccess());
       }
     };
 

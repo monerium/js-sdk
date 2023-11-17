@@ -96,6 +96,7 @@ export class MoneriumClient {
           clientSecret: clientSecret as string,
         };
       }
+      // this.getAccess();
     }
   }
 
@@ -133,7 +134,12 @@ export class MoneriumClient {
     window.location.replace(authFlowUrl);
   }
 
-  async connect(
+  /**
+   * Get access to the API
+   * @param {AuthorizationCodeCredentials | ClientCredentials} client - the client credentials
+   * @returns boolean to indicate if access has been granted
+   */
+  async getAccess(
     client?: AuthorizationCodeCredentials | ClientCredentials
   ): Promise<boolean> {
     const clientId = client?.clientId || this.#client?.clientId;
@@ -160,7 +166,7 @@ export class MoneriumClient {
     }
 
     if (isServer) {
-      throw new Error('This only works on client side');
+      throw new Error('This only works client side');
     }
 
     const authCode =
@@ -169,10 +175,10 @@ export class MoneriumClient {
     const refreshToken =
       sessionStorage.getItem(STORAGE_REFRESH_TOKEN) || undefined;
 
-    if (authCode) {
-      await this.#authCodeAuthorization(clientId, redirectUrl, authCode);
-    } else if (refreshToken) {
+    if (refreshToken) {
       await this.#refreshTokenAuthorization(clientId, refreshToken);
+    } else if (authCode) {
+      await this.#authCodeAuthorization(clientId, redirectUrl, authCode);
     }
 
     return !!this.bearerProfile;
@@ -181,7 +187,7 @@ export class MoneriumClient {
   /**
    * {@link https://monerium.dev/api-docs#operation/auth-token}
    */
-  async getBearerToken(args: AuthArgs): Promise<BearerProfile> {
+  async #grantAccess(args: AuthArgs): Promise<BearerProfile> {
     let params:
       | AuthCodeRequest
       | RefreshTokenRequest
@@ -194,7 +200,7 @@ export class MoneriumClient {
     } else if (isClientCredentials(args)) {
       params = { ...args, grant_type: 'client_credentials' };
     } else {
-      throw new Error('Authentication method could not be detected.');
+      throw new Error('Authorization grant type could not be detected.');
     }
 
     await this.#api<BearerProfile>(
@@ -207,14 +213,18 @@ export class MoneriumClient {
         this.bearerProfile = res;
         this.isAuthorized = !!res;
         this.#authorizationHeader = `Bearer ${res?.access_token}`;
-        window.sessionStorage.setItem(
-          STORAGE_REFRESH_TOKEN,
-          this.bearerProfile?.refresh_token || ''
-        );
+        if (!isServer) {
+          window.sessionStorage.setItem(
+            STORAGE_REFRESH_TOKEN,
+            this.bearerProfile?.refresh_token || ''
+          );
+        }
       })
       .catch((err) => {
-        sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
-        sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+        if (!isServer) {
+          sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
+          sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+        }
         throw new Error(err?.message);
         // if ((params as AuthCodeRequest).code) {
         //   throw new Error('Code verifier has already been used');
@@ -375,7 +385,7 @@ export class MoneriumClient {
 
     sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
     // Remove auth code from URL.
-    return await this.getBearerToken({
+    return await this.#grantAccess({
       code: authCode,
       redirect_uri: redirectUrl as string,
       client_id: clientId,
@@ -387,7 +397,7 @@ export class MoneriumClient {
     clientId,
     clientSecret,
   }: ClientCredentials) => {
-    return await this.getBearerToken({
+    return await this.#grantAccess({
       client_id: clientId,
       client_secret: clientSecret as string,
     });
@@ -397,7 +407,7 @@ export class MoneriumClient {
     clientId: string,
     refreshToken: string
   ) => {
-    return await this.getBearerToken({
+    return await this.#grantAccess({
       refresh_token: refreshToken,
       client_id: clientId,
     });
@@ -442,11 +452,24 @@ export class MoneriumClient {
 
     return socket;
   };
-
+  /**
+   * Cleanups the socket and the subscriptions
+   */
   async disconnect() {
-    sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
+    if (!isServer) {
+      sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
+    }
     this.#subscriptions.clear();
     this.#socket?.close();
+  }
+  /**
+   * Revokes access
+   */
+  async revokeAccess() {
+    if (!isServer) {
+      sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+    }
+    this.disconnect();
   }
 
   /**
@@ -476,9 +499,9 @@ export class MoneriumClient {
   // -- Deprecated methods
 
   /**
-   * @deprecated since v2.6.4, use {@link getBearerToken} instead.
+   * @deprecated since v2.6.4, use {@link getAccess} instead.
    */
-  auth = async (args: AuthArgs) => await this.getBearerToken(args);
+  auth = async (args: AuthArgs) => await this.#grantAccess(args);
 
   /**
    * @deprecated since v2.6.4, use {@link authorize} instead.

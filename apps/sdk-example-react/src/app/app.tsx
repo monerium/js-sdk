@@ -20,7 +20,7 @@ export function App() {
   useEffect(() => {
     const connect = async () => {
       if (monerium) {
-        setIsAuthorized(await monerium.connect());
+        setIsAuthorized(await monerium.getAccess());
       }
     };
 

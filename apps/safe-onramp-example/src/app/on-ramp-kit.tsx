@@ -1,4 +1,4 @@
-import { MoneriumPack, SafeMoneriumClient } from '@safe-global/onramp-kit';
+import { MoneriumPack } from '@safe-global/onramp-kit';
 import Safe, { EthersAdapter } from '@safe-global/protocol-kit';
 import { OrderState } from '@monerium/sdk';
 import { ethers } from 'ethers';
@@ -23,13 +23,9 @@ const ethAdapter = new EthersAdapter({ ethers, signerOrProvider: safeOwner });
 
 const TEMP_SAFE_ADDRESS = '0x8C129070612c9352F05172016DeE4dF8c607A669';
 const safeAddress = TEMP_SAFE_ADDRESS;
-const authCode = '';
-const refreshToken = '';
 
 const Foobar = () => {
-  const [safeSdk, setSafeSdk] = useState<Safe>();
   const [monerium, setMonerium] = useState<any>();
-  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -66,37 +62,45 @@ const Foobar = () => {
       }
     };
     init();
-
-    return () => {
-      monerium?.close();
-    };
   }, [web3Provider]);
-
-  // useEffect(() => {
-  //   const authContext = await monerium.getAuthContext();
-  //   const profile = await monerium.getProfile(authContext.defaultProfile);
-  //   const balances = await monerium.getBalances();
-  //   const orders = await monerium.getOrders();
-
-  //   if (moneriumClient.bearerProfile) {
-  //     localStorage.setItem(
-  //       MONERIUM_TOKEN,
-  //       moneriumClient.bearerProfile.refresh_token
-  //     );
-  //   }
-  // }, [monerium])
 
   useEffect(() => {
     (async () => {
-      await monerium?.open();
+      if (!monerium) return;
+      try {
+        const moneriumClient = await monerium?.open();
+
+        if (moneriumClient.bearerProfile) {
+          const authContext = await moneriumClient.getAuthContext();
+          const profile = await moneriumClient.getProfile(
+            authContext.defaultProfile
+          );
+          const balances = await moneriumClient.getBalances();
+          const orders = await moneriumClient.getOrders();
+
+          console.group('Monerium data');
+          console.log('AuthContext', authContext);
+          console.log('Profile', profile);
+          console.log('Balances', balances);
+          console.log('Orders', orders);
+          console.log('Bearer Profile', moneriumClient.bearerProfile);
+          console.groupEnd();
+        }
+      } catch (e) {
+        console.log(e);
+      }
     })();
   }, [monerium]);
+  if (!monerium) return <p>nothing here</p>;
   return (
-    <button
-      onClick={async () => await monerium.open({ initiateAuthFlow: true })}
-    >
-      Connect to Monerium
-    </button>
+    <>
+      <h1>TEMP_SAFE_ADDRESS hardcoded as {TEMP_SAFE_ADDRESS}</h1>
+      <button
+        onClick={async () => await monerium.open({ initiateAuthFlow: true })}
+      >
+        Connect to Monerium
+      </button>
+    </>
   );
 };
 export default Foobar;
