@@ -8,7 +8,7 @@
   let authCtx;
   let isAuthorized = true;
   (async () => {
-    isAuthorized = await client.connect();
+    isAuthorized = await client.getAccess();
     authCtx = await client.getAuthContext();
     console.log(authCtx);
   })();

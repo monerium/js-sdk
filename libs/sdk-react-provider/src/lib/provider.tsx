@@ -50,7 +50,7 @@ export const MoneriumProvider: FC<MoneriumProviderProps> = ({
   useEffect(() => {
     const connect = async () => {
       if (monerium) {
-        setIsAuthorized(await monerium.connect());
+        setIsAuthorized(await monerium.getAccess());
       }
     };
 

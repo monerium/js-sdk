@@ -499,12 +499,17 @@ export class MoneriumClient {
   // -- Deprecated methods
 
   /**
-   * @deprecated since v2.6.4, use {@link getAccess} instead.
+   * @deprecated since v2.6.4, will be removed in 2.7.2+, use {@link getAccess} instead.
    */
   auth = async (args: AuthArgs) => await this.#grantAccess(args);
 
   /**
-   * @deprecated since v2.6.4, use {@link authorize} instead.
+   * @deprecated since v2.7.1, will be removed in 2.7.2+, use {@link getAccess} instead.
+   */
+  connect = async (args: AuthArgs) => await this.#grantAccess(args);
+
+  /**
+   * @deprecated since v2.6.4, will be removed in 2.7.2+, use {@link authorize} instead.
    */
   getAuthFlowURI = (args: PKCERequestArgs): string => {
     const url = getAuthFlowUrlAndStoreCodeVerifier(this.#env.api, args);
@@ -513,7 +518,7 @@ export class MoneriumClient {
   };
 
   /**
-   *  @deprecated since v2.0.7, use {@link getAuthFlowURI} instead.
+   *  @deprecated since v2.0.7, will be removed in 2.7.2+, use {@link getAuthFlowURI} instead.
    */
   pkceRequest = (args: PKCERequestArgs) => this.getAuthFlowURI(args);
 
