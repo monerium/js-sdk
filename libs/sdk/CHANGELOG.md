@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.2](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.1...sdk-v2.7.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* expose getChain and getNetwork + update docs ([085d9bd](https://github.com/monerium/public-monorepo/commit/085d9bd261342d14936a7f9f1d5cc1fdd859ec26))
+
 ## [2.7.0](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.0...sdk-v2.7.0) (2023-11-13)
 
 ### Features
