@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.2](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.2...sdk-v2.7.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* add removal date to deprecated methods and add connect as deprecated ([c1e02e2](https://github.com/monerium/public-monorepo/commit/c1e02e273b08b091475757e0e68051098e20a5a0))
+
 ## [2.7.2](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.1...sdk-v2.7.2) (2023-11-17)
 
 
