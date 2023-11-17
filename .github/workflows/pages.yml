@@ -17,7 +17,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Yarn install
+      - name: Check if node_modules artifact exists
+        id: check_artifact
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const { data: artifacts } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            const hasArtifact = artifacts.artifacts.some(artifact => artifact.name === 'node_modules');
+            return hasArtifact;
+          result-encoding: string
+      - name: Download node_modules
+        if: steps.check_artifact.outputs.result == 'true'
+        uses: actions/download-artifact@v2
+        with:
+          name: node_modules
+
+      - name: Extract node_modules
+        if: steps.check_artifact.outputs.result == 'true'
+        run: tar -xzf node_modules.tar.gz
+
+      - name: Install dependencies
+        if: steps.check_artifact.outputs.result != 'true'
         run: yarn install --immutable --immutable-cache
       - name: Install SDK dependencies
         run: cd libs/sdk && yarn install

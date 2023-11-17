@@ -44,6 +44,13 @@ jobs:
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
         if: ${{ steps.release.outputs.releases_created }}
+      - name: Archive node_modules
+        run: tar -czf node_modules.tar.gz node_modules
+      - name: Upload node_modules
+        uses: actions/upload-artifact@v2
+        with:
+          name: node_modules
+          path: node_modules.tar.gz
       - run: echo "Release ${{ steps.release.outputs['libs/sdk--tag_name'] }} created for sdk."
         if: ${{ steps.release.outputs['libs/sdk--release_created'] }}
 
