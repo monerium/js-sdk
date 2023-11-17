@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.3](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.2...sdk-v2.7.3) (2023-11-17)
+
+
+### Bug Fixes
+
+* clean query on error ([2620322](https://github.com/monerium/public-monorepo/commit/26203224cdfb09d5f1a8be34f0fb27ed6c95b800))
+
 ## [2.7.2](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.2...sdk-v2.7.2) (2023-11-17)
 
 
