@@ -95,6 +95,8 @@ jobs:
     continue-on-error: true
     if: ${{ needs.release-please.outputs.sdk_releases_created || github.event.inputs.runArchiveStatic == 'true' }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Install SDK dependencies
         run: cd libs/sdk && yarn install
       # Conditionally publish packages based on changes in their respective dist directories
