@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      runArchiveStatic:
+        description: 'Manually trigger deployment of static pages'
+        required: true
+        default: 'false'
 permissions:
   contents: write
   pull-requests: write
@@ -33,10 +39,8 @@ jobs:
         uses: nrwl/nx-set-shas@v3
         with:
           main-branch-name: ${{ env.BASE }}
-
       - name: Use Node.js
         uses: actions/setup-node@v4
-        # not sure if this is serving a purpose
         with:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
@@ -45,32 +49,20 @@ jobs:
         run: yarn install --immutable --immutable-cache
         # for security reasons, use --check-cache if accepting PRs from third-parties.
         if: ${{ steps.release.outputs.releases_created }}
-
       - run: echo "Release ${{ steps.release.outputs['libs/sdk--tag_name'] }} created for sdk."
         if: ${{ steps.release.outputs['libs/sdk--release_created'] }}
 
-      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk--tag_name'] }} ${{ steps.release.outputs['libs/sdk-react-provider--tag_name'] }}
-        run: yarn nx affected -t publish --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk--tag_name'] }}
+        run: yarn nx publish sdk --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.releases_created }}
+        if: ${{ steps.release.outputs['libs/sdk--release_created']  }}
+      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk-react-provider--tag_name'] }}
+        run: yarn nx publish sdk-react-provider --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs['libs/sdk-react-provider--release_created']  }}
 
-      - run: cd libs/sdk && yarn install
-        if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
-      # Conditionally publish packages based on changes in their respective dist directories
-      - name: Build documentation
-        run: yarn nx docs sdk
-        if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
-      - name: Archive static artifacts
-        run: cd libs/sdk && tar -cvf static.tar static
-        shell: bash
-        if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk' }}
-      - name: Upload static artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: static-artifacts
-          path: libs/sdk/static.tar
-        if: ${{ steps.release.outputs.releases_created && steps.release.outputs['libs/sdk--path'] == 'libs/sdk'}}
       - name: Debug
         run: |
           echo '${{ steps.release.outputs.tag_name }}'
@@ -89,16 +81,37 @@ jobs:
   echo:
     needs: [release-please]
     runs-on: ubuntu-latest
+
     steps:
       - name: Debug
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
           echo '${{ needs.release-please.outputs.sdk_releases_created }}'
 
+  archive-static:
+    name: Archive static artifacts
+    runs-on: ubuntu-latest
+    needs: [release-please]
+    continue-on-error: true
+    if: ${{ needs.release-please.outputs.sdk_releases_created || github.event.inputs.runArchiveStatic == 'true' }}
+    steps:
+      - name: Install SDK dependencies
+        run: cd libs/sdk && yarn install
+      # Conditionally publish packages based on changes in their respective dist directories
+      - name: Build documentation
+        run: yarn nx docs sdk
+      - name: Archive static artifacts
+        run: cd libs/sdk && tar -cvf static.tar static
+        shell: bash
+      - name: Upload static artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: static-artifacts
+          path: libs/sdk/static.tar
   deploy-static:
     name: Trigger static pages deploy
-    needs: [release-please]
+    needs: [archive-static, release-please]
     uses: './.github/workflows/pages.yml'
     with:
-      releases_created: ${{ needs.release-please.outputs.releases_created && needs.release-please.outputs.sdk_releases_created || 'false' }}
+      releases_created: ${{ needs.release-please.outputs.sdk_releases_created || 'false' }}
     secrets: inherit
