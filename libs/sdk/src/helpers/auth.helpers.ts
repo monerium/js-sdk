@@ -97,6 +97,7 @@ export const getAuthFlowUrlAndStoreCodeVerifier = (
  */
 export const cleanQueryString = () => {
   const url = window.location.href;
+  if (!url || !url?.includes('?')) return;
   const [baseUrl, queryString] = url.split('?');
 
   // Check if there is a query string
