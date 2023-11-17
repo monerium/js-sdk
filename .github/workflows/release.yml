@@ -4,12 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      runArchiveStatic:
-        description: 'Manually trigger deployment of static pages'
-        required: true
-        default: 'false'
+
 permissions:
   contents: write
   pull-requests: write
@@ -81,42 +76,17 @@ jobs:
   echo:
     needs: [release-please]
     runs-on: ubuntu-latest
-
     steps:
       - name: Debug
         run: |
           echo '${{ needs.release-please.outputs.releases_created || false }}'
           echo '${{ needs.release-please.outputs.sdk_releases_created }}'
 
-  archive-static:
-    name: Archive static artifacts
-    runs-on: ubuntu-latest
-    needs: [release-please]
-    continue-on-error: true
-    if: ${{ needs.release-please.outputs.sdk_releases_created || github.event.inputs.runArchiveStatic == 'true' }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        if: ${{ github.event.inputs.runArchiveStatic == 'true' }}
-      - name: Yarn install
-        run: yarn install --immutable --immutable-cache
-        if: ${{ github.event.inputs.runArchiveStatic == 'true' }}
-      - name: Install SDK dependencies
-        run: cd libs/sdk && yarn install
-      # Conditionally publish packages based on changes in their respective dist directories
-      - name: Build documentation
-        run: yarn nx docs sdk
-      - name: Archive static artifacts
-        run: cd libs/sdk && tar -cvf static.tar static
-        shell: bash
-      - name: Upload static artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: static-artifacts
-          path: libs/sdk/static.tar
-
   deploy-static:
     name: Trigger static pages deploy
-    needs: [archive-static]
-    uses: './.github/workflows/pages.yml'
-    secrets: inherit
+    needs: [release-please]
+    if: ${{ needs.release-please.outputs.sdk_releases_created }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger static pages deploy
+        uses: './.github/workflows/pages.yml'

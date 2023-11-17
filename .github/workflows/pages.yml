@@ -6,7 +6,6 @@
 
 name: Deploy to Github pages
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -18,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true # while the SDK_GH_ACCESS_TOKEN is not approved
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: static-artifacts
-      - name: Extract artifacts
-        run: tar -xvf static.tar && mv static/* .
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Yarn install
+        run: yarn install --immutable --immutable-cache
+      - name: Install SDK dependencies
+        run: cd libs/sdk && yarn install
+      - name: Build documentation
+        run: yarn nx docs sdk
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
