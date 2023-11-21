@@ -227,12 +227,6 @@ export class MoneriumClient {
           cleanQueryString();
         }
         throw new Error(err?.message);
-        // if ((params as AuthCodeRequest).code) {
-        //   throw new Error('Code verifier has already been used');
-        // }
-        // if ((params as RefreshTokenRequest).refresh_token) {
-        //   throw new Error('Refresh token has already been used');
-        // }
       });
 
     /**
