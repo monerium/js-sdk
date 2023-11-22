@@ -8,17 +8,26 @@ Laga Static output fyrir typedocs
 Generate a library:
 
 ```
-npx nx generate @nrwl/js:library
+nx g @nrwl/js:library
+
+```
+
+Generate an app:
+
+```bash
+# Nextjs app
+nx g @nx/next:app my-new-app
+# React app
+nx g @nx/react:application sdk-example-react --directory examples/sdk-react
+
 ```
 
 Generate a publishable library ( TODO : not currently using the nx way of publishing)
 
 ```
 nx g @nrwl/react:lib sdk-provider --publishable --importPath @monerium/sdk-provider
-```
 
-Generate an app
-npx nx g @nx/react:application sdk-example-react --directory sdk-example-react
+```
 
 Generate a component
 
@@ -47,5 +56,3 @@ Add `"release-at": "x.x.x"` to `.release-please-manifest.json`
 - [] Add instructions to provider README
 
 - [] Reduce stuff in package
-
-THE SDK_GH_TOKEN will expire 10.11.2024

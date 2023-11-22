@@ -4,6 +4,13 @@
   "sourceRoot": "libs/sdk/src",
   "projectType": "library",
   "targets": {
+    "init": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn install",
+        "cwd": "libs/sdk"
+      }
+    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],

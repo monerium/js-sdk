@@ -315,31 +315,31 @@ API documentation:
 
 #### Subscribe to order events
 
-````ts
+```ts
 import { OrderState } from '@monerium/sdk';
 const [orderState, setOrderState] = useState<OrderState>();
 // Subscribe to order events
 monerium.subscribeOrders(OrderState.pending, (notification) => {
-  setOrderState(notification.meta.state)
-})
+  setOrderState(notification.meta.state);
+});
 
-  monerium.subscribeOrders(OrderState.placed, (notification) => {
-  setOrderState(notification.meta.state)
-})
+monerium.subscribeOrders(OrderState.placed, (notification) => {
+  setOrderState(notification.meta.state);
+});
 
-  monerium.subscribeOrders(OrderState.rejected, (notification) => {
-  setOrderState(notification.meta.state)
+monerium.subscribeOrders(OrderState.rejected, (notification) => {
+  setOrderState(notification.meta.state);
   setTimeout(() => {
-    setOrderState(undefined)
-  }, 5000)
-})
+    setOrderState(undefined);
+  }, 5000);
+});
 
-  monerium.subscribeOrders(OrderState.processed, (notification) => {
-  setOrderState(notification.meta.state)
+monerium.subscribeOrders(OrderState.processed, (notification) => {
+  setOrderState(notification.meta.state);
   setTimeout(() => {
-    setOrderState(undefined)
-  }, 5000)
-})
+    setOrderState(undefined);
+  }, 5000);
+});
 ```
 
 ## API Reference
@@ -354,24 +354,20 @@ We are using Yarn as a package manager.
 
 ```sh
 # Install dependencies
-yarn
+nx run sdk:init
 
 # Run Vite to build a production release distributable
-yarn build
+nx run sdk:build
 
 # Run Vite in watch mode to detect changes to files during development
-yarn watch
+nx run sdk:build --watch
 
 # Update the docs. This will run the build and update the docs in the static folder.
 # Open static/index.html in your browser to view the docs. Refresh the page to see changes.
-yarn docs:watch
-````
-
-Smart IDEs (such as VSCode) require [special configuration](https://yarnpkg.com/getting-started/editor-sdks) for TypeScript to work when using Yarn Plug'n'Play installs.
-
-```sh
-yarn dlx @yarnpkg/sdks vscode
+nx run sdk:docs:watch
 ```
+
+## Linking
 
 For development, a package can be linked into another project. This is often useful to test out new features or when trying to debug an issue in a package that manifests itself in another project. run yarn link inside of the sdk project.
 
@@ -388,9 +384,11 @@ yarn link "@monerium/sdk"
 
 If you get an error that there is already a package called '@monerium/sdk' registered, but you can't find it and unlinking does nothing, remove it manually with `rm -rf ~/.config/yarn/link/@monerium` and try again.
 
-#### Documentation
+### Documentation
 
-Refer to [Typedocs](https://typedoc.org/) syntaxes to use for this [documentation](https://monerium.github.io/sdk/).
+Refer to [Typedocs](https://typedoc.org/) syntaxes to use for this [documentation](https://monerium.github.io/js-sdk/).
+
+There is a Github action that will automatically run on the successful release of the SDK. It will generate a static output of the documentation and push it to the `gh-pages` branch. The documentation is then available at https://monerium.github.io/js-sdk/.
 
 #### Publishing
 

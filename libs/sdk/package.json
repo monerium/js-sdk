@@ -29,11 +29,11 @@
     "crypto-js": "^4.2.0"
   },
   "scripts": {
-    "build:watch": "yarn build:main --watch",
     "docs": "yarn typedoc --options docs/typedoc.json && node docs/editStatic.js",
     "docs:watch": "nodemon --watch . --ignore static -e ts,css,md --exec 'typedoc --options docs/typedoc.json && node docs/editStatic.js'"
   },
   "devDependencies": {
+    "nodemon": "3.0.1",
     "typedoc": "0.23.23",
     "typedoc-theme-hierarchy": "^3.2.1"
   }
