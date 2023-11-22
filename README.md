@@ -6,8 +6,9 @@
 
 ## Start the apps
 
-Run `nx serve sdk-provider-example-nextjs`. Open your browser and navigate to http://localhost:5173/.
-Run `nx serve sdk-example-react`. Open your browser and navigate to http://localhost:4200/.
+Run `nx serve examples-sdk-provider-nextjs`. Open your browser and navigate to http://localhost:5173/.
+
+Run `nx serve examples-sdk-react`. Open your browser and navigate to http://localhost:4200/.
 
 ## Generate code
 
@@ -43,8 +44,8 @@ Examples:
 
 ```
 nx serve examples-safe-onramp
-nx serve examples-sdk_react
-nx serve examples-sdk-provider_nextjs --port 1234
+nx serve examples-sdkreact
+nx serve examples-sdk-provider-nextjs --port 1234
 ```
 
 ## Want better Editor Integration?
