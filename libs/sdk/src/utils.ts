@@ -45,8 +45,18 @@ export const rfc3339 = (d: Date) => {
  *
  * @returns string
  */
-export const placeOrderMessage = (amount: string | number, iban: string) =>
-  `Send EUR ${amount} to ${iban} at ${rfc3339(new Date())}`;
+export const placeOrderMessage = (
+  amount: string | number,
+  receiver: string,
+  chainId?: number
+) => {
+  if (chainId) {
+    return `Send EUR ${amount} to ${receiver} on ${getChain(
+      chainId
+    )} at ${rfc3339(new Date())}`;
+  }
+  return `Send EUR ${amount} to ${receiver} at ${rfc3339(new Date())}`;
+};
 
 /**
  * Replacement for URLSearchParams, Metamask snaps do not include node globals.
@@ -55,13 +65,13 @@ export const placeOrderMessage = (amount: string | number, iban: string) =>
  * @returns 'application/x-www-form-urlencoded' compatible string
  */
 export const urlEncoded = (
-  body: Record<string, string>,
+  body: Record<string, string>
 ): string | undefined => {
   return body && Object.entries(body)?.length > 0
     ? Object.entries(body)
         .map(
           ([key, value]) =>
-            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
         )
         .join('&')
     : '';
@@ -115,7 +125,7 @@ export const getIban = (profile: Profile, address: string, chainId: number) => {
         account.address === address &&
         account.iban &&
         account.chain === getChain(chainId) &&
-        account.network === getNetwork(chainId),
+        account.network === getNetwork(chainId)
     )?.iban ?? ''
   );
 };
@@ -123,7 +133,7 @@ export const getIban = (profile: Profile, address: string, chainId: number) => {
 export const getAmount = (
   balances?: Balances[],
   address?: string,
-  chainId?: ChainId,
+  chainId?: ChainId
   // currency?: Currency,
 ): string => {
   if (!balances || !address || !chainId) return '0';
@@ -131,7 +141,7 @@ export const getAmount = (
 
   const eurBalance = balances.find(
     (account) =>
-      account.address === address && account.chain === getChain(chainId),
+      account.address === address && account.chain === getChain(chainId)
   )?.balances;
 
   return (

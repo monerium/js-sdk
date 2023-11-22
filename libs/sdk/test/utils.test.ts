@@ -40,7 +40,7 @@ describe('getMessage', () => {
   test('should format message with valid inputs', () => {
     const message = placeOrderMessage(100, 'DE89370400440532013000');
     expect(message).toMatch(
-      /^Send EUR 100 to DE89370400440532013000 at \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/,
+      /^Send EUR 100 to DE89370400440532013000 at \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
     );
   });
 });
@@ -207,5 +207,51 @@ describe('url params', () => {
 
       expect(result).toBe('');
     });
+  });
+});
+
+describe('placeOrderMessage', () => {
+  test('should format message with valid inputs', () => {
+    const amount = 100;
+    const iban = 'DE89370400440532013000';
+    const message = placeOrderMessage(amount, iban);
+    expect(message).toMatch(
+      new RegExp(
+        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+      )
+    );
+  });
+
+  test('should handle string amount', () => {
+    const amount = '100';
+    const iban = 'DE89370400440532013000';
+    const message = placeOrderMessage(amount, iban);
+    expect(message).toMatch(
+      new RegExp(
+        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+      )
+    );
+  });
+
+  test('should handle number amount', () => {
+    const amount = 100;
+    const iban = 'DE89370400440532013000';
+    const message = placeOrderMessage(amount, iban);
+    expect(message).toMatch(
+      new RegExp(
+        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+      )
+    );
+  });
+  test('should format message with chainId', () => {
+    const amount = 100;
+    const receiver = 'DE89370400440532013000';
+    const chainId = 137;
+    const message = placeOrderMessage(amount, receiver, chainId);
+    expect(message).toMatch(
+      new RegExp(
+        `^Send EUR ${amount} to ${receiver} on polygon at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+      )
+    );
   });
 });

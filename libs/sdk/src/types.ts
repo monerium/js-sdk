@@ -234,6 +234,12 @@ export interface KYC {
 export enum PaymentStandard {
   iban = 'iban',
   scan = 'scan',
+  chain = 'chain',
+}
+
+export interface Identifier {
+  standard: PaymentStandard;
+  bic?: string;
 }
 
 export interface Account {
@@ -290,12 +296,19 @@ export interface Fee {
   amount: string;
 }
 
-export interface IBAN {
+export interface IBAN extends Identifier {
   standard: PaymentStandard.iban;
   iban: string;
 }
 
-export interface SCAN {
+export interface CrossChain extends Identifier {
+  standard: PaymentStandard.chain;
+  address: string;
+  chain: string;
+  network: string;
+}
+
+export interface SCAN extends Identifier {
   standard: PaymentStandard.scan;
   sortCode: string;
   accountNumber: string;
@@ -313,7 +326,7 @@ export interface Corporation {
 }
 
 export interface Counterpart {
-  identifier: IBAN | SCAN;
+  identifier: IBAN | SCAN | CrossChain;
   details: Individual | Corporation;
 }
 
