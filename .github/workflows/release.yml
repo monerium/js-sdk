@@ -89,4 +89,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger static pages deploy
-        uses: './.github/workflows/pages.yml'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: pages.yml
