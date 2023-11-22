@@ -24,9 +24,4 @@ jobs:
   #     # - run: yarn nx docs sdk
   deploy-static:
     name: Trigger static pages deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger static pages deploy
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: pages.yml
+    uses: ./.github/workflows/pages.yml
