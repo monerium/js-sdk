@@ -26,9 +26,8 @@ jobs:
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          TOKEN: ${{ secrets.SDK_GH_ACCESS_TOKEN }}
-          REPOSITORY-NAME: monerium/sdk
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: libs/sdk/static # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
-          COMMIT-MESSAGE: 'Deployed SDK Docs & Code Coverage to Github Pages (https://monerium.github.io/sdk)'
+          token: ${{ secrets.SDK_GH_ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: libs/sdk/static # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch
+          commit-message: 'Deployed SDK Docs & Code Coverage to Github Pages (https://monerium.github.io/js-sdk)'
