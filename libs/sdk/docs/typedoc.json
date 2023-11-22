@@ -10,8 +10,8 @@
   "kindSortOrder": ["Class", "Interface", "Enum"],
   "excludePrivate": true,
   "navigationLinks": {
-    "Source code": "https://github.com/monerium/sdk",
-    "Issues": "https://github.com/monerium/sdk/issues",
+    "Source code": "https://github.com/monerium/js-sdk",
+    "Issues": "https://github.com/monerium/js-sdk/issues",
     "NPM": "https://www.npmjs.com/package/@monerium/sdk",
     "E-money": "https://monerium.com/",
     "App": "https://monerium.app/"

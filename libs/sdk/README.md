@@ -404,8 +404,8 @@ Common questions developers have regarding the SDK.
 
 [Support](https://monerium.app/help)
 [Telegram](https://t.me/+lGtM1gY9zWthNGE8)
-[Github Issues](https://github.com/monerium/sdk/issues)
+[Github Issues](https://github.com/monerium/js-sdk/issues)
 
 ## Release Notes
 
-https://github.com/monerium/sdk/releases
+https://github.com/monerium/js-sdk/releases

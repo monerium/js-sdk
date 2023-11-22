@@ -5,10 +5,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monerium/sdk.git"
+    "url": "git+https://github.com/monerium/js-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/monerium/sdk/issues"
+    "url": "https://github.com/monerium/js-sdk/issues"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
