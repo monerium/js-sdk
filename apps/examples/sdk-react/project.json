@@ -1,0 +1,96 @@
+{
+  "name": "examples-sdk-react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/examples/sdk-react/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/examples/sdk-react",
+        "index": "apps/examples/sdk-react/src/index.html",
+        "baseHref": "/",
+        "main": "apps/examples/sdk-react/src/main.tsx",
+        "tsConfig": "apps/examples/sdk-react/tsconfig.app.json",
+        "assets": [
+          "apps/examples/sdk-react/src/favicon.ico",
+          "apps/examples/sdk-react/src/assets"
+        ],
+        "styles": ["apps/examples/sdk-react/src/styles.css"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/examples/sdk-react/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/examples/sdk-react/src/environments/environment.ts",
+              "with": "apps/examples/sdk-react/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "examples-sdk-react:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "examples-sdk-react:build:development"
+        },
+        "production": {
+          "buildTarget": "examples-sdk-react:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/examples/sdk-react/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "examples-sdk-react:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/examples/sdk-react/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
