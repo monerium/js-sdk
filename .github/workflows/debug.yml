@@ -6,22 +6,16 @@ on:
       - debug
 
 jobs:
-  # build-test:
-  #   name: 'Build & test'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # - name: Use Node.js
-  #     #   uses: actions/setup-node@v5
-  #     #   with:
-  #     #     node-version: 16
-  #     #     registry-url: 'https://registry.npmjs.org'
-  #     #     always-auth: true
-  #     - uses: actions/checkout@v4
-  #       # these if statements ensure that a publication only occurs when
-  #       # a new release is created:
-  #     - run: yarn install
-  #     - run: cd libs/sdk && yarn install
-  #     # - run: yarn nx docs sdk
+  set-output-false:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set output
+        id: step1
+        run: echo "::set-output name=my_output::false"
+    outputs:
+      my_output: ${{ steps.step1.outputs.my_output }}
   deploy-static:
     name: Trigger static pages deploy
+    needs: [set-output-false]
+    if: ${{ needs.set-output-false.outputs.my_output }}
     uses: ./.github/workflows/pages.yml

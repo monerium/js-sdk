@@ -86,7 +86,4 @@ jobs:
     name: Trigger static pages deploy
     needs: [release-please]
     if: ${{ needs.release-please.outputs.sdk_releases_created }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger static pages deploy
-        uses: './.github/workflows/pages.yml'
+    uses: ./.github/workflows/pages.yml
