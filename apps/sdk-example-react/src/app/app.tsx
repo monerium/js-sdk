@@ -48,6 +48,7 @@ export function App() {
 
   return (
     <div>
+      <p>Welcome sdk-example-react</p>
       {!isAuthorized && (
         <button
           onClick={() =>
