@@ -86,9 +86,4 @@ jobs:
     name: Trigger static pages deploy
     needs: [release-please]
     if: ${{ needs.release-please.outputs.sdk_releases_created }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger static pages deploy
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: pages.yml
+    uses: ./.github/workflows/pages.yml
