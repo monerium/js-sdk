@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/monerium/js-sdk/compare/sdk-v2.7.3...sdk-v2.8.0) (2023-11-22)
+
+
+### Features
+
+* add cross-chain typings ([f3b6583](https://github.com/monerium/js-sdk/commit/f3b6583a268e3aeaf31f143ce5fddbb30cb2f32e))
+
 ## [2.7.3](https://github.com/monerium/public-monorepo/compare/sdk-v2.7.3...sdk-v2.7.3) (2023-11-17)
 
 
