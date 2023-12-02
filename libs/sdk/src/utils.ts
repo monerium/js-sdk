@@ -48,14 +48,17 @@ export const rfc3339 = (d: Date) => {
 export const placeOrderMessage = (
   amount: string | number,
   receiver: string,
-  chainId?: number
+  chainId?: number,
+  currency?: 'eur' | 'gbp' | 'usd' | 'isk',
 ) => {
+  const curr = `${currency?.toUpperCase() || 'EUR'}`;
+
   if (chainId) {
-    return `Send EUR ${amount} to ${receiver} on ${getChain(
-      chainId
+    return `Send ${curr} ${amount} to ${receiver} on ${getChain(
+      chainId,
     )} at ${rfc3339(new Date())}`;
   }
-  return `Send EUR ${amount} to ${receiver} at ${rfc3339(new Date())}`;
+  return `Send ${curr} ${amount} to ${receiver} at ${rfc3339(new Date())}`;
 };
 
 /**

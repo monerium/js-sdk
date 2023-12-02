@@ -254,4 +254,17 @@ describe('placeOrderMessage', () => {
       )
     );
   });
+
+  test('should format message with currency', () => {
+    const amount = 100;
+    const receiver = 'DE89370400440532013000';
+    const chainId = 137;
+    const currency = 'gbp';
+    const message = placeOrderMessage(amount, receiver, chainId, currency);
+    expect(message).toMatch(
+      new RegExp(
+        `^Send GBP ${amount} to ${receiver} on polygon at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+      )
+    );
+  });
 });
