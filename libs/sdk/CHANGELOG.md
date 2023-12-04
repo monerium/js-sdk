@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.8.1](https://github.com/monerium/js-sdk/compare/sdk-v2.8.0...sdk-v2.8.1) (2023-12-02)
+
+
+### Bug Fixes
+
+* added currency to placeOrderMessage [#66](https://github.com/monerium/js-sdk/issues/66) ([496df35](https://github.com/monerium/js-sdk/commit/496df35f268330ac7158785534d11f3ffece4777))
+* docs:watch task + docs update ([b42d6d8](https://github.com/monerium/js-sdk/commit/b42d6d804eb45869fd5a1ac39bf81b832e56bd2a))
+
 ## [2.8.0](https://github.com/monerium/js-sdk/compare/sdk-v2.7.3...sdk-v2.8.0) (2023-11-22)
 
 
