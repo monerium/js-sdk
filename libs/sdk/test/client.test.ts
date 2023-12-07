@@ -512,5 +512,12 @@ describe('disconnect()', () => {
     await client.disconnect();
 
     expect(sessionStorageSpy).toHaveBeenCalledWith(STORAGE_CODE_VERIFIER);
+  })
+  it('should remove bearerProfile from the class instance', async () => {
+    const client = new MoneriumClient();
+
+    await client.disconnect();
+
+    expect(client.bearerProfile).toBeUndefined();
   });
 });
