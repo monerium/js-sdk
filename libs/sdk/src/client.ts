@@ -456,6 +456,8 @@ export class MoneriumClient {
     }
     this.#subscriptions.clear();
     this.#socket?.close();
+    this.#authorizationHeader = undefined;
+    this.bearerProfile = undefined;
   }
   /**
    * Revokes access
