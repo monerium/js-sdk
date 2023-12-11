@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.3](https://github.com/monerium/js-sdk/compare/sdk-v2.8.2...sdk-v2.8.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* timezone issues in unit tests, closes [#70](https://github.com/monerium/js-sdk/issues/70) ([fc10817](https://github.com/monerium/js-sdk/commit/fc10817ac5ad064c75a2c275feb070f2eafc7f6a))
+
 ## [2.8.2](https://github.com/monerium/js-sdk/compare/sdk-v2.8.1...sdk-v2.8.2) (2023-12-11)
 
 
