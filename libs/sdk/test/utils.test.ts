@@ -15,21 +15,33 @@ import {
   PaymentStandard,
   Profile,
 } from '../src/types';
+import timezone_mock from 'timezone-mock';
 
+const timestampRegex =
+  '\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[-+]\\d{2}:\\d{2})';
 describe('rfc3339', () => {
   test('should format Date to RFC 3339 format', () => {
+    timezone_mock.register('UTC');
     const date = new Date(1682820495 * 1000);
+    timezone_mock.unregister();
+
     expect(rfc3339(date)).toEqual('2023-04-30T02:08:15Z');
   });
 
   test('should handle timezone offset for positive offset', () => {
-    const date = new Date('2023-04-30T12:00:00+02:00');
-    expect(rfc3339(date)).toEqual('2023-04-30T10:00:00Z');
+    timezone_mock.register('Europe/London');
+    const date = new Date('2023-04-30T12:00:00+01:00');
+    timezone_mock.unregister();
+
+    expect(rfc3339(date)).toEqual('2023-04-30T12:00:00+01:00');
   });
 
   test('should handle timezone offset for negative offset', () => {
-    const date = new Date('2023-04-30T12:00:00-02:00');
-    expect(rfc3339(date)).toEqual('2023-04-30T14:00:00Z');
+    timezone_mock.register('US/Pacific');
+    const date = new Date('2023-04-30T12:00:00-07:00');
+    timezone_mock.unregister();
+
+    expect(rfc3339(date)).toEqual('2023-04-30T12:00:00-07:00');
   });
   test('should throw an error if date is not provided', () => {
     expect(() => rfc3339(new Date('what'))).toThrow('Invalid Date');
@@ -40,7 +52,7 @@ describe('getMessage', () => {
   test('should format message with valid inputs', () => {
     const message = placeOrderMessage(100, 'DE89370400440532013000');
     expect(message).toMatch(
-      /^Send EUR 100 to DE89370400440532013000 at \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
+      /^Send EUR 100 to DE89370400440532013000 at \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[-+]\d{2}:\d{2})$/
     );
   });
 });
@@ -216,9 +228,7 @@ describe('placeOrderMessage', () => {
     const iban = 'DE89370400440532013000';
     const message = placeOrderMessage(amount, iban);
     expect(message).toMatch(
-      new RegExp(
-        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
-      )
+      new RegExp(`^Send EUR ${amount} to ${iban} at ${timestampRegex}$`)
     );
   });
 
@@ -227,9 +237,7 @@ describe('placeOrderMessage', () => {
     const iban = 'DE89370400440532013000';
     const message = placeOrderMessage(amount, iban);
     expect(message).toMatch(
-      new RegExp(
-        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
-      )
+      new RegExp(`^Send EUR ${amount} to ${iban} at ${timestampRegex}$`)
     );
   });
 
@@ -238,9 +246,7 @@ describe('placeOrderMessage', () => {
     const iban = 'DE89370400440532013000';
     const message = placeOrderMessage(amount, iban);
     expect(message).toMatch(
-      new RegExp(
-        `^Send EUR ${amount} to ${iban} at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
-      )
+      new RegExp(`^Send EUR ${amount} to ${iban} at ${timestampRegex}$`)
     );
   });
   test('should format message with chainId', () => {
@@ -250,7 +256,7 @@ describe('placeOrderMessage', () => {
     const message = placeOrderMessage(amount, receiver, chainId);
     expect(message).toMatch(
       new RegExp(
-        `^Send EUR ${amount} to ${receiver} on polygon at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+        `^Send EUR ${amount} to ${receiver} on polygon at ${timestampRegex}$`
       )
     );
   });
@@ -263,7 +269,7 @@ describe('placeOrderMessage', () => {
     const message = placeOrderMessage(amount, receiver, chainId, currency);
     expect(message).toMatch(
       new RegExp(
-        `^Send GBP ${amount} to ${receiver} on polygon at \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`
+        `^Send GBP ${amount} to ${receiver} on polygon at ${timestampRegex}$`
       )
     );
   });

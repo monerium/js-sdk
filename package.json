@@ -72,6 +72,7 @@
     "react-refresh": "^0.10.0",
     "svelte": "^4.2.3",
     "svelte-check": "^3.6.0",
+    "timezone-mock": "^1.3.6",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typedoc": "0.23.23",
