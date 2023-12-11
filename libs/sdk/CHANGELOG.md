@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.8.2](https://github.com/monerium/js-sdk/compare/sdk-v2.8.1...sdk-v2.8.2) (2023-12-11)
+
+
+### Bug Fixes
+
+* remove authentication info on disconnect ([26e38c4](https://github.com/monerium/js-sdk/commit/26e38c46ee562deff8f04f38221ce091e24f53b2))
+* test ([9c01345](https://github.com/monerium/js-sdk/commit/9c0134559b628f3abf377400c7250cecca9e41d8))
+
 ## [2.8.1](https://github.com/monerium/js-sdk/compare/sdk-v2.8.0...sdk-v2.8.1) (2023-12-02)
 
 
