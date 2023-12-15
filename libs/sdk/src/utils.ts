@@ -49,13 +49,13 @@ export const placeOrderMessage = (
   amount: string | number,
   receiver: string,
   chainId?: number,
-  currency?: 'eur' | 'gbp' | 'usd' | 'isk',
+  currency?: 'eur' | 'gbp' | 'usd' | 'isk'
 ) => {
   const curr = `${currency?.toUpperCase() || 'EUR'}`;
 
   if (chainId) {
     return `Send ${curr} ${amount} to ${receiver} on ${getChain(
-      chainId,
+      chainId
     )} at ${rfc3339(new Date())}`;
   }
   return `Send ${curr} ${amount} to ${receiver} at ${rfc3339(new Date())}`;
@@ -150,4 +150,16 @@ export const getAmount = (
   return (
     eurBalance?.find((balance) => balance.currency === currency)?.amount || '0'
   );
+};
+
+export const mapChainAndNetwork = (body: any) => {
+  if (body?.chainId) {
+    const { chainId, ...rest } = body;
+    return {
+      ...rest,
+      chain: getChain(chainId),
+      network: getNetwork(chainId),
+    };
+  }
+  return body;
 };

@@ -63,7 +63,7 @@ export type Network<
     : never
   : never;
 
-export type ChainId = 1 | 5 | 100 | 137 | 10200 | 80001;
+export type ChainId = number | 1 | 5 | 100 | 137 | 10200 | 80001;
 
 export enum Currency {
   eur = 'eur',
@@ -161,12 +161,12 @@ export type PKCERequest = {
   address?: string;
   /** the signature of the wallet to automatically link */
   signature?: string;
-  /** @deprecated - Use chainId - the network of the wallet to automatically link */
+  /** @deprecated - Use chainId  */
   network?: Network;
-  /** @deprecated - Use chainId - the chain of the wallet to automatically link */
+  /** @deprecated - Use chainId */
   chain?: Chain;
   /** The network of the wallet to automatically link  */
-  chainId?: ChainId | number;
+  chainId?: ChainId;
 };
 
 // -- authContext
@@ -304,8 +304,11 @@ export interface IBAN extends Identifier {
 export interface CrossChain extends Identifier {
   standard: PaymentStandard.chain;
   address: string;
-  chain: string;
-  network: string;
+  chainId: ChainId;
+  /** @deprecated - Use chainId */
+  chain?: Chain;
+  /** @deprecated - Use chainId */
+  network?: Network;
 }
 
 export interface SCAN extends Identifier {
@@ -398,8 +401,11 @@ export interface NewOrderCommon {
 }
 export interface NewOrderByAddress extends NewOrderCommon {
   address: string;
-  chain: Chain;
-  network: Network;
+  /** @deprecated - Use 'chainId' */
+  chain?: Chain;
+  /** @deprecated - Use 'chainId' */
+  network?: Network;
+  chainId: ChainId;
 }
 export interface NewOrderByAccountId extends NewOrderCommon {
   accountId: string;
@@ -425,8 +431,11 @@ export interface SupportingDoc {
 // -- linkAddress
 
 export interface CurrencyAccounts {
-  network: Network;
-  chain: Chain;
+  /** @deprecated - Use 'chainId' */
+  network?: Network;
+  /** @deprecated - Use 'chainId' */
+  chain?: Chain;
+  chainId: ChainId;
   currency: Currency;
 }
 
@@ -435,8 +444,11 @@ export interface LinkAddress {
   message: string;
   signature: string;
   accounts: CurrencyAccounts[];
+  /** @deprecated - Use 'chainId' */
   network?: Network;
+  /** @deprecated - Use 'chainId' */
   chain?: Chain;
+  chainId?: ChainId;
 }
 
 // -- Notifications
@@ -471,7 +483,7 @@ export type AuthFlowOptions = {
   redirectUrl?: string;
   address?: string;
   signature?: string;
-  chainId?: number;
+  chainId?: ChainId;
 };
 
 export type ClientCredentials = {

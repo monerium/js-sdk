@@ -46,6 +46,10 @@ Examples:
 nx serve examples-safe-onramp
 nx serve examples-sdkreact
 nx serve examples-sdk-provider-nextjs --port 1234
+
+
+// Run a specific test
+ nx test sdk --test-file libs/sdk/test/client.test.ts
 ```
 
 ## Want better Editor Integration?

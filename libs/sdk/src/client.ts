@@ -1,4 +1,4 @@
-import { urlEncoded } from './utils';
+import { mapChainAndNetwork, urlEncoded } from './utils';
 import { MONERIUM_CONFIG } from './config';
 import type {
   AuthArgs,
@@ -297,6 +297,9 @@ export class MoneriumClient {
    * {@link https://monerium.dev/api-docs#operation/profile-addresses}
    */
   linkAddress(profileId: string, body: LinkAddress) {
+    body = mapChainAndNetwork(body);
+    body.accounts = body.accounts.map((account) => mapChainAndNetwork(account));
+
     return this.#api(
       'post',
       `profiles/${profileId}/addresses`,
@@ -308,16 +311,24 @@ export class MoneriumClient {
    * {@link https://monerium.dev/api-docs#operation/post-orders}
    */
   placeOrder(order: NewOrder, profileId?: string): Promise<Order> {
-    const req = { ...order, kind: 'redeem', currency: 'eur' };
+    const body = {
+      kind: 'redeem',
+      currency: 'eur',
+      ...mapChainAndNetwork(order),
+      counterpart: {
+        ...order.counterpart,
+        identifier: mapChainAndNetwork(order.counterpart.identifier),
+      },
+    };
 
     if (profileId) {
       return this.#api<Order>(
         'post',
         `profiles/${profileId}/orders`,
-        JSON.stringify(req)
+        JSON.stringify(body)
       );
     } else {
-      return this.#api<Order>('post', `orders`, JSON.stringify(req));
+      return this.#api<Order>('post', `orders`, JSON.stringify(body));
     }
   }
 

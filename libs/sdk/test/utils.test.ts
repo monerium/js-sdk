@@ -4,6 +4,9 @@ import {
   rfc3339,
   getAmount,
   getIban,
+  getNetwork,
+  mapChainAndNetwork,
+  getChain,
 } from '../src/utils';
 import encodeBase64Url from 'crypto-js/enc-base64url';
 import SHA256 from 'crypto-js/sha256';
@@ -272,5 +275,24 @@ describe('placeOrderMessage', () => {
         `^Send GBP ${amount} to ${receiver} on polygon at ${timestampRegex}$`
       )
     );
+  });
+});
+
+describe('mapChainAndNetwork', () => {
+  it('should add network and chain properties and remove chainId if chainId is present', () => {
+    const body = { chainId: 5 };
+    const expectedBody = {
+      network: getNetwork(5),
+      chain: getChain(5),
+    };
+
+    expect(mapChainAndNetwork(body)).toEqual(expectedBody);
+  });
+
+  it('should not modify the body object if chainId is not present', () => {
+    const body = { someProperty: 'someValue' };
+    const expectedBody = { ...body };
+
+    expect(mapChainAndNetwork(body)).toEqual(expectedBody);
   });
 });

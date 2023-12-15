@@ -35,6 +35,7 @@ describe('MoneriumClient', () => {
     window.sessionStorage.clear();
     jest.restoreAllMocks();
   });
+
   test('client initialization', () => {
     const client = new MoneriumClient();
 
@@ -196,21 +197,21 @@ describe('MoneriumClient', () => {
       signature: OWNER_SIGNATURE,
       accounts: [
         {
-          network: 'goerli',
           chain: 'ethereum',
+          network: 'goerli',
           currency: Currency.eur,
         },
         {
-          network: 'chiado',
           chain: 'gnosis',
+          network: 'chiado',
           currency: Currency.eur,
         },
         {
-          network: 'mumbai',
           chain: 'polygon',
+          network: 'mumbai',
           currency: Currency.eur,
         },
-      ],
+      ] as any /** to bypass typeerror to test backwards compatibility */,
     });
 
     expect(res).toMatchObject({
@@ -437,6 +438,7 @@ describe('MoneriumClient', () => {
         },
         message: placeOrderMessage,
         memo: 'Powered by Monerium SDK',
+        chainId: 5,
         chain: 'ethereum',
         network: 'goerli',
       })
@@ -459,25 +461,27 @@ describe('MoneriumClient', () => {
       '0x23bf7e1b240d238b13cb293673c3419915402bb34435af62850b1d8e63f82c564fb73ab19691cf248594423dd01e441bb2ccb38ce2e2ecc514dfc3075bea829e1c';
 
     await client
-      .placeOrder({
-        amount: '10',
-        signature: placeOrderSignatureHash,
-        address: PUBLIC_KEY,
-        counterpart: {
-          identifier: {
-            standard: PaymentStandard.iban,
-            iban: 'GR1601101250000000012300695',
+      .placeOrder(
+        {
+          amount: '10',
+          signature: placeOrderSignatureHash,
+          address: PUBLIC_KEY,
+          counterpart: {
+            identifier: {
+              standard: PaymentStandard.iban,
+              iban: 'GR1601101250000000012300695',
+            },
+            details: {
+              firstName: 'Mockbank',
+              lastName: 'Testerson',
+            },
           },
-          details: {
-            firstName: 'Mockbank',
-            lastName: 'Testerson',
-          },
-        },
-        message: placeOrderMessage,
-        memo: 'Powered by Monerium SDK',
-        chain: 'ethereum',
-        network: 'goerli',
-      })
+          message: placeOrderMessage,
+          memo: 'Powered by Monerium SDK',
+          chain: 'ethereum',
+          network: 'goerli',
+        } as any /** to bypass typeerror for chain and network */
+      )
       .catch((err) => {
         expect(err.message).toBe('Timestamp is expired');
       });
