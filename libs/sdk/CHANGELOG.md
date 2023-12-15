@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/monerium/js-sdk/compare/sdk-v2.8.3...sdk-v2.9.0) (2023-12-15)
+
+
+### Features
+
+* use chainId instead of network and chain ([9d4f0dd](https://github.com/monerium/js-sdk/commit/9d4f0ddec29d68fe56a0c65074310d842168932e))
+
 ## [2.8.3](https://github.com/monerium/js-sdk/compare/sdk-v2.8.2...sdk-v2.8.3) (2023-12-11)
 
 
