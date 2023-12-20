@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/monerium/js-sdk/compare/sdk-v2.9.0...sdk-v2.10.0) (2023-12-20)
+
+
+### Features
+
+* use localStorage instead of sessionStorage to persists session between tabs ([8b5bc8b](https://github.com/monerium/js-sdk/commit/8b5bc8bfe0d773d14e13c020b75744b751375cb9))
+
 ## [2.9.0](https://github.com/monerium/js-sdk/compare/sdk-v2.8.3...sdk-v2.9.0) (2023-12-15)
 
 
