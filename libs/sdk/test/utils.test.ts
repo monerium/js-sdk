@@ -280,10 +280,10 @@ describe('placeOrderMessage', () => {
 
 describe('mapChainAndNetwork', () => {
   it('should add network and chain properties and remove chainId if chainId is present', () => {
-    const body = { chainId: 5 };
+    const body = { chainId: 11155111 };
     const expectedBody = {
-      network: getNetwork(5),
-      chain: getChain(5),
+      network: getNetwork(11155111),
+      chain: getChain(11155111),
     };
 
     expect(mapChainAndNetwork(body)).toEqual(expectedBody);
