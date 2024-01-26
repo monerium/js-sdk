@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const CHAIN_ID = 5;
+const CHAIN_ID = 11155111;
 
 const web3Provider = new ethers.providers.Web3Provider(
   window.ethereum,

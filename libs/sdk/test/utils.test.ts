@@ -206,19 +206,19 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'goerli',
+            network: 'sepolia',
           },
           {
             address: 'testAddress2',
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'goerli',
+            network: 'sepolia',
           },
         ],
       };
 
-      const result = getIban(profile, 'testAddress2', 5);
+      const result = getIban(profile, 'testAddress2', 11155111);
 
       expect(result).toBe('');
     });

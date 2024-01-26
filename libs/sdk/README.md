@@ -281,7 +281,7 @@ const order = await monerium.placeOrder({
   message,
   memo: 'Powered by Monerium SDK',
   chain: 'ethereum',
-  network: 'goerli',
+  network: 'sepolia',
   // supportingDocumentId, see below
 });
 ```

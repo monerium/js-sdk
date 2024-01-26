@@ -87,7 +87,7 @@ export const urlEncoded = (
 export const getChain = (chainId: number): Chain => {
   switch (chainId) {
     case 1:
-    case 5:
+    case 11155111:
       return 'ethereum';
     case 100:
     case 10200:
@@ -110,8 +110,8 @@ export const getNetwork = (chainId: number): Networks => {
     case 100:
     case 137:
       return 'mainnet';
-    case 5:
-      return 'goerli';
+    case 11155111:
+      return 'sepolia';
     case 10200:
       return 'chiado';
     case 80001:
