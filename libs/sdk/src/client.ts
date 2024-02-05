@@ -63,6 +63,8 @@ export class MoneriumClient {
 
   #client?: BearerTokenCredentials;
 
+  state: string | undefined;
+
   /** Constructor for no arguments, defaults to sandbox */
   constructor();
   /** Constructor with only env as an argument*/
@@ -128,6 +130,7 @@ export class MoneriumClient {
       address: client?.address,
       signature: client?.signature,
       chainId: client?.chainId,
+      state: client?.state,
     });
 
     // Redirect to the authFlow
@@ -172,13 +175,16 @@ export class MoneriumClient {
     const authCode =
       new URLSearchParams(window.location.search).get('code') || undefined;
 
+    const state =
+      new URLSearchParams(window.location.search).get('state') || undefined;
+
     const refreshToken =
       localStorage.getItem(STORAGE_REFRESH_TOKEN) || undefined;
 
     if (refreshToken) {
       await this.#refreshTokenAuthorization(clientId, refreshToken);
     } else if (authCode) {
-      await this.#authCodeAuthorization(clientId, redirectUrl, authCode);
+      await this.#authCodeAuthorization(clientId, redirectUrl, authCode, state);
     }
 
     return !!this.bearerProfile;
@@ -378,7 +384,8 @@ export class MoneriumClient {
   #authCodeAuthorization = async (
     clientId: string,
     redirectUrl: string,
-    authCode: string
+    authCode: string,
+    state?: string
   ) => {
     const codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER) || '';
 
@@ -389,7 +396,10 @@ export class MoneriumClient {
     /** @deprecated, use localStorage, will be removed in v3 */
     this.codeVerifier = codeVerifier;
 
+    this.state = state;
+
     localStorage.removeItem(STORAGE_CODE_VERIFIER);
+
     // Remove auth code from URL.
     return await this.#grantAccess({
       code: authCode,

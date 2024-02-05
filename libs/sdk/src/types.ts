@@ -484,6 +484,7 @@ export type AuthFlowOptions = {
   address?: string;
   signature?: string;
   chainId?: ChainId;
+  state?: string;
 };
 
 export type ClientCredentials = {
