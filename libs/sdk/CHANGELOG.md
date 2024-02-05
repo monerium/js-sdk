@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.11.0](https://github.com/monerium/js-sdk/compare/sdk-v2.10.0...sdk-v2.11.0) (2024-02-05)
+
+
+### Features
+
+* sepolia ([6de28cd](https://github.com/monerium/js-sdk/commit/6de28cd23be3a9130f2ecc08b47b4cdcf79991f5))
+
+
+### Bug Fixes
+
+* sepolia ([b5fbf28](https://github.com/monerium/js-sdk/commit/b5fbf2833bf460368c11c2ab8dccad0fde92339c))
+* sepolia ([a744ebc](https://github.com/monerium/js-sdk/commit/a744ebcc95a96765e54928116945b9bb2bc4f2a6))
+* sepolia instead of goerli ([030b172](https://github.com/monerium/js-sdk/commit/030b17259aad5d6c4576911ea328420b8d2cfd63))
+
 ## [2.10.0](https://github.com/monerium/js-sdk/compare/sdk-v2.9.0...sdk-v2.10.0) (2023-12-20)
 
 
