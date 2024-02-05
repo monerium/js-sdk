@@ -25,7 +25,7 @@ describe('MoneriumClient', () => {
       signature: OWNER_SIGNATURE,
       accounts: [
         {
-          chainId: 5,
+          chainId: 11155111,
           currency: Currency.eur,
         },
         {
@@ -57,7 +57,7 @@ describe('MoneriumClient', () => {
             {
               currency: Currency.eur,
               chain: 'ethereum',
-              network: 'goerli',
+              network: 'sepolia',
             },
             {
               currency: Currency.eur,
@@ -98,7 +98,7 @@ describe('MoneriumClient', () => {
         },
         message: placeOrderMessage,
         memo: 'Powered by Monerium SDK',
-        chainId: 5,
+        chainId: 11155111,
       })
       .catch(() => ({}));
 
@@ -127,7 +127,7 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
         }),
       })
     );
@@ -148,7 +148,7 @@ describe('MoneriumClient', () => {
             identifier: {
               standard: PaymentStandard.chain,
               address: '0x1234567890123456789012345678901234567890',
-              chainId: 5,
+              chainId: 11155111,
             },
             details: {
               firstName: 'Mockbank',
@@ -158,7 +158,7 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
         } as any /** to bypass type error for chain and network, for backwards compatibility */
       )
       .catch(() => ({}));
@@ -180,7 +180,7 @@ describe('MoneriumClient', () => {
               standard: PaymentStandard.chain,
               address: '0x1234567890123456789012345678901234567890',
               chain: 'ethereum',
-              network: 'goerli',
+              network: 'sepolia',
             },
             details: {
               firstName: 'Mockbank',
@@ -190,7 +190,7 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
         }),
       })
     );
@@ -222,7 +222,7 @@ describe('MoneriumClient', () => {
             message: placeOrderMessage,
             memo: 'Powered by Monerium SDK',
             chain: 'ethereum',
-            network: 'goerli',
+            network: 'sepolia',
           } as any /** to bypass typeerror for chain and network */
         )
       )

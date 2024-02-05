@@ -136,13 +136,13 @@ describe('MoneriumClient', () => {
       redirect_uri: 'http://example.com',
       client_id: 'testClientId',
       address: '0x',
-      chainId: 5,
+      chainId: 11155111,
     });
     const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=sepolia`
     );
   });
 
@@ -154,14 +154,14 @@ describe('MoneriumClient', () => {
       client_id: 'testClientId',
       address: '0x',
       chain: 'ethereum',
-      network: 'goerli',
+      network: 'sepolia',
     });
 
     const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=goerli`
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=sepolia`
     );
   });
 
@@ -198,7 +198,7 @@ describe('MoneriumClient', () => {
       accounts: [
         {
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
           currency: Currency.eur,
         },
         {
@@ -236,7 +236,7 @@ describe('MoneriumClient', () => {
     const authContext = await client.getAuthContext();
     const profile = await client.getProfile(authContext.profiles[0].id);
 
-    expect(profile.accounts[0].id).toBe('ebed25b6-6dcb-11ee-8aa6-5273f65ed05b');
+    expect(profile.accounts[0].id).toBe('ebedb56e-6dcb-11ee-8aa6-5273f65ed05b');
   });
 
   test('get balances', async () => {
@@ -254,7 +254,7 @@ describe('MoneriumClient', () => {
         expect.objectContaining({
           // id: '4b208818-44e3-11ed-adac-b2efc0e6677d',
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
           address: PUBLIC_KEY,
         }),
       ])
@@ -304,11 +304,11 @@ describe('MoneriumClient', () => {
       client_secret: APP_ONE_CREDENTIALS_SECRET,
     });
 
-    const order = await client.getOrder('2dc957ed-6dcc-11ee-85f9-fae826042a04');
+    const order = await client.getOrder('18c8a048-c474-11ee-b9e4-76cca206b674');
 
-    expect(order.kind).toBe('redeem');
-    expect(order.amount).toBe('1');
-    expect(order.memo).toBe('Powered by Monerium');
+    expect(order.kind).toBe('issue');
+    expect(order.amount).toBe('3000');
+    expect(order.memo).toBe("Let's make money smarter!");
   });
 
   test('get tokens', async () => {
@@ -323,11 +323,11 @@ describe('MoneriumClient', () => {
 
     const expected = [
       {
-        address: '0x83B844180f66Bbc3BE2E97C6179035AF91c4Cce8',
+        address: '0xd58C5Db52B5B3Eb24EE38AF287d2cb0F424172A5',
         chain: 'ethereum',
         currency: 'eur',
         decimals: 18,
-        network: 'goerli',
+        network: 'sepolia',
         symbol: 'EURe',
         ticker: 'EUR',
       },
@@ -438,9 +438,9 @@ describe('MoneriumClient', () => {
         },
         message: placeOrderMessage,
         memo: 'Powered by Monerium SDK',
-        chainId: 5,
+        chainId: 11155111,
         chain: 'ethereum',
-        network: 'goerli',
+        network: 'sepolia',
       })
       .catch((err) => {
         expect(err.message).toBe('Invalid signature');
@@ -479,7 +479,7 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'goerli',
+          network: 'sepolia',
         } as any /** to bypass typeerror for chain and network */
       )
       .catch((err) => {

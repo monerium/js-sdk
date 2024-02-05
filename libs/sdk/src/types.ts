@@ -8,7 +8,7 @@ export type Config = {
 
 export type ENV = 'sandbox' | 'production';
 
-export type EthereumTestnet = 'goerli';
+export type EthereumTestnet = 'sepolia';
 export type GnosisTestnet = 'chiado';
 export type PolygonTestnet = 'mumbai';
 
@@ -45,9 +45,9 @@ export type NetworkStrict<
 
 /*
  * -- isValid:
- * const network: Network<'ethereum', 'sandbox'> = 'goerli';
+ * const network: Network<'ethereum', 'sandbox'> = 'sepolia';
  * const network: Network<'ethereum'> = 'mainnet';
- * const network: Network<'ethereum'> = 'goerli'
+ * const network: Network<'ethereum'> = 'sepolia'
  * const network: Network = 'chiado'
  *
  * -- isInValid:
@@ -63,7 +63,7 @@ export type Network<
     : never
   : never;
 
-export type ChainId = number | 1 | 5 | 100 | 137 | 10200 | 80001;
+export type ChainId = number | 1 | 11155111 | 100 | 137 | 10200 | 80001;
 
 export enum Currency {
   eur = 'eur',
