@@ -10,7 +10,7 @@ import {
 
 describe('getAuthFlowUrlAndStoreCodeVerifier', () => {
   afterEach(() => {
-    sessionStorage.clear();
+    localStorage.clear();
   });
 
   test('should generate auth flow URL and store code verifier', () => {
@@ -22,13 +22,13 @@ describe('getAuthFlowUrlAndStoreCodeVerifier', () => {
 
     const url = getAuthFlowUrlAndStoreCodeVerifier(baseUrl, args);
 
-    const codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER);
     const codeChallenge = generateCodeChallenge(codeVerifier as string);
 
     expect(url).toContain(baseUrl);
     expect(url).toContain(`client_id=${args.client_id}`);
     expect(url).toContain(
-      `redirect_uri=${encodeURIComponent(args.redirect_uri)}`,
+      `redirect_uri=${encodeURIComponent(args.redirect_uri)}`
     );
     expect(url).toContain(`code_challenge=${codeChallenge}`);
     expect(codeVerifier).toBeTruthy();

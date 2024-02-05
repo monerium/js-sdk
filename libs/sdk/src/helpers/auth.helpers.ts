@@ -78,7 +78,7 @@ export const generateCodeChallenge = (codeVerifier: string) => {
 };
 
 /**
- * Constructs the Auth Flow URL and stores the code verifier in the session storage
+ * Constructs the Auth Flow URL and stores the code verifier in the local storage
  */
 export const getAuthFlowUrlAndStoreCodeVerifier = (
   baseUrl: string,
@@ -87,7 +87,7 @@ export const getAuthFlowUrlAndStoreCodeVerifier = (
   const codeVerifier = generateRandomString();
   const codeChallenge = generateCodeChallenge(codeVerifier);
 
-  sessionStorage.setItem(STORAGE_CODE_VERIFIER, codeVerifier || '');
+  localStorage.setItem(STORAGE_CODE_VERIFIER, codeVerifier || '');
 
   return `${baseUrl}/auth?${getAuthFlowParams(args, codeChallenge)}`;
 };

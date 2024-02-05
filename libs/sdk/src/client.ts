@@ -48,7 +48,7 @@ export class MoneriumClient {
 
   #authorizationHeader?: string;
   /**
-   * @deprecated, use sessionStorage, will be removed in v3
+   * @deprecated, use localStorage, will be removed in v3
    * The PKCE code verifier
    * */
   codeVerifier?: string;
@@ -104,7 +104,7 @@ export class MoneriumClient {
 
   /**
    * Construct the url to the authorization code flow,
-   * Code Verifier needed for the code challenge is stored in session storage
+   * Code Verifier needed for the code challenge is stored in local storage
    * For automatic wallet link, add the following properties: `address`, `signature` & `chainId`
    * @returns string
    * {@link https://monerium.dev/api-docs#operation/auth}
@@ -179,7 +179,7 @@ export class MoneriumClient {
       new URLSearchParams(window.location.search).get('state') || undefined;
 
     const refreshToken =
-      sessionStorage.getItem(STORAGE_REFRESH_TOKEN) || undefined;
+      localStorage.getItem(STORAGE_REFRESH_TOKEN) || undefined;
 
     if (refreshToken) {
       await this.#refreshTokenAuthorization(clientId, refreshToken);
@@ -220,7 +220,7 @@ export class MoneriumClient {
         this.isAuthorized = !!res;
         this.#authorizationHeader = `Bearer ${res?.access_token}`;
         if (!isServer) {
-          window.sessionStorage.setItem(
+          window.localStorage.setItem(
             STORAGE_REFRESH_TOKEN,
             this.bearerProfile?.refresh_token || ''
           );
@@ -228,8 +228,8 @@ export class MoneriumClient {
       })
       .catch((err) => {
         if (!isServer) {
-          sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
-          sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+          localStorage.removeItem(STORAGE_CODE_VERIFIER);
+          localStorage.removeItem(STORAGE_REFRESH_TOKEN);
           cleanQueryString();
         }
         throw new Error(err?.message);
@@ -377,9 +377,9 @@ export class MoneriumClient {
 
   /*
    * Triggered when the client has claimed an authorization code
-   * 1. Code Verifier is picked up from the sessionStorage
+   * 1. Code Verifier is picked up from the localStorage
    * 2. auth service is called to claim the tokens
-   * 3. Refresh token is stored in the sessionStorage
+   * 3. Refresh token is stored in the localStorage
    */
   #authCodeAuthorization = async (
     clientId: string,
@@ -387,18 +387,19 @@ export class MoneriumClient {
     authCode: string,
     state?: string
   ) => {
-    const codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER) || '';
+    const codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER) || '';
 
     if (!codeVerifier) {
       throw new Error('Code verifier not found');
     }
 
-    /** @deprecated, use sessionStorage, will be removed in v3 */
+    /** @deprecated, use localStorage, will be removed in v3 */
     this.codeVerifier = codeVerifier;
 
     this.state = state;
 
-    sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
+    localStorage.removeItem(STORAGE_CODE_VERIFIER);
+
     // Remove auth code from URL.
     return await this.#grantAccess({
       code: authCode,
@@ -472,7 +473,7 @@ export class MoneriumClient {
    */
   async disconnect() {
     if (!isServer) {
-      sessionStorage.removeItem(STORAGE_CODE_VERIFIER);
+      localStorage.removeItem(STORAGE_CODE_VERIFIER);
     }
     this.#subscriptions.clear();
     this.#socket?.close();
@@ -484,7 +485,7 @@ export class MoneriumClient {
    */
   async revokeAccess() {
     if (!isServer) {
-      sessionStorage.removeItem(STORAGE_REFRESH_TOKEN);
+      localStorage.removeItem(STORAGE_REFRESH_TOKEN);
     }
     this.disconnect();
   }
@@ -530,7 +531,7 @@ export class MoneriumClient {
    */
   getAuthFlowURI = (args: PKCERequestArgs): string => {
     const url = getAuthFlowUrlAndStoreCodeVerifier(this.#env.api, args);
-    this.codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER) as string;
+    this.codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER) as string;
     return url;
   };
 

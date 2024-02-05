@@ -32,7 +32,7 @@ import { generateCodeChallenge } from '../src/helpers';
 const message = 'I hereby declare that I am the address owner.';
 describe('MoneriumClient', () => {
   afterEach(() => {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
     jest.restoreAllMocks();
   });
 
@@ -87,7 +87,7 @@ describe('MoneriumClient', () => {
 
     await client.authorize();
 
-    const codeVerifier = window.sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
@@ -138,7 +138,7 @@ describe('MoneriumClient', () => {
       address: '0x',
       chainId: 5,
     });
-    const codeVerifier = window.sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
@@ -157,7 +157,7 @@ describe('MoneriumClient', () => {
       network: 'goerli',
     });
 
-    const codeVerifier = window.sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
@@ -173,7 +173,7 @@ describe('MoneriumClient', () => {
       client_id: 'testClientId',
     });
 
-    const codeVerifier = window.sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(test).toBe(
@@ -351,7 +351,7 @@ describe('MoneriumClient', () => {
       clientId: 'testClientId',
     });
 
-    const codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
@@ -378,7 +378,7 @@ describe('MoneriumClient', () => {
       chainId: 137,
     });
 
-    const codeVerifier = sessionStorage.getItem(STORAGE_CODE_VERIFIER);
+    const codeVerifier = localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
@@ -389,9 +389,9 @@ describe('MoneriumClient', () => {
 
   test('authorize with refresh token attempt', async () => {
     const client = new MoneriumClient();
-    sessionStorage.setItem(STORAGE_REFRESH_TOKEN, 'testRefreshToken');
+    localStorage.setItem(STORAGE_REFRESH_TOKEN, 'testRefreshToken');
 
-    const getItemSpy = jest.spyOn(window.sessionStorage, 'getItem');
+    const getItemSpy = jest.spyOn(window.localStorage, 'getItem');
 
     try {
       await client.getAccess({
@@ -510,12 +510,12 @@ describe('MoneriumClient', () => {
 // });
 describe('disconnect()', () => {
   it('should remove the codeVerifier from the storage', async () => {
-    const sessionStorageSpy = jest.spyOn(window.sessionStorage, 'removeItem');
+    const localStorageSpy = jest.spyOn(window.localStorage, 'removeItem');
     const client = new MoneriumClient();
 
     await client.disconnect();
 
-    expect(sessionStorageSpy).toHaveBeenCalledWith(STORAGE_CODE_VERIFIER);
+    expect(localStorageSpy).toHaveBeenCalledWith(STORAGE_CODE_VERIFIER);
   });
   it('should remove bearerProfile from the class instance', async () => {
     const client = new MoneriumClient();

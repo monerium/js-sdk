@@ -47,12 +47,12 @@ jobs:
       - run: echo "Release ${{ steps.release.outputs['libs/sdk--tag_name'] }} created for sdk."
         if: ${{ steps.release.outputs['libs/sdk--release_created'] }}
 
-      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk--tag_name'] }}
+      - name: "Publish NPM SDK package: ${{ steps.release.outputs['libs/sdk--tag_name'] }}"
         run: yarn nx publish sdk --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs['libs/sdk--release_created']  }}
-      - name: Publish NPM package ${{ steps.release.outputs['libs/sdk-react-provider--tag_name'] }}
+      - name: "Publish NPM SDK React provider package: ${{ steps.release.outputs['libs/sdk-react-provider--tag_name'] }}"
         run: yarn nx publish sdk-react-provider --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
