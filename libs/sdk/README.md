@@ -40,7 +40,7 @@ yarn add @monerium/sdk
 
 | Environment | Chain    | Network |
 | ----------- | -------- | ------- |
-| sandbox     | ethereum | goerli  |
+| sandbox     | ethereum | sepolia |
 |             | polygon  | mumbai  |
 |             | gnosis   | chiado  |
 | production  | ethereum | mainnet |
@@ -222,7 +222,7 @@ await monerium.linkAddress(profileId, {
   message: LINK_MESSAGE
   signature,
   accounts: [
-    {"currency":"eur","chain":"ethereum","network":"goerli"},
+    {"currency":"eur","chain":"ethereum","network":"sepolia"},
     {"currency":"eur","chain":"gnosis","network":"chiado"}
   ],
 } as LinkAddress);
