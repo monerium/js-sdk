@@ -236,7 +236,7 @@ describe('MoneriumClient', () => {
     const authContext = await client.getAuthContext();
     const profile = await client.getProfile(authContext.profiles[0].id);
 
-    expect(profile.accounts[0].id).toBe('ebed25b6-6dcb-11ee-8aa6-5273f65ed05b');
+    expect(profile.accounts[0].id).toBe('ebedb56e-6dcb-11ee-8aa6-5273f65ed05b');
   });
 
   test('get balances', async () => {
@@ -304,11 +304,11 @@ describe('MoneriumClient', () => {
       client_secret: APP_ONE_CREDENTIALS_SECRET,
     });
 
-    const order = await client.getOrder('2dc957ed-6dcc-11ee-85f9-fae826042a04');
+    const order = await client.getOrder('18c8a048-c474-11ee-b9e4-76cca206b674');
 
-    expect(order.kind).toBe('redeem');
-    expect(order.amount).toBe('1');
-    expect(order.memo).toBe('Powered by Monerium');
+    expect(order.kind).toBe('issue');
+    expect(order.amount).toBe('3000');
+    expect(order.memo).toBe("Let's make money smarter!");
   });
 
   test('get tokens', async () => {
@@ -323,7 +323,7 @@ describe('MoneriumClient', () => {
 
     const expected = [
       {
-        address: '0x74F24A66D2F2e142c7d3CDdC3bd87082A1BfaCbF',
+        address: '0xd58C5Db52B5B3Eb24EE38AF287d2cb0F424172A5',
         chain: 'ethereum',
         currency: 'eur',
         decimals: 18,
