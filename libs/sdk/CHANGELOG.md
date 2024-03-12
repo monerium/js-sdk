@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.1](https://github.com/monerium/js-sdk/compare/sdk-v2.11.0...sdk-v2.11.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* upload document ([0f6d49d](https://github.com/monerium/js-sdk/commit/0f6d49d821afa72c4a61e94e7a3a1377357dc727))
+
 ## [2.11.0](https://github.com/monerium/js-sdk/compare/sdk-v2.10.0...sdk-v2.11.0) (2024-02-05)
 
 
