@@ -1,4 +1,4 @@
 {
-  "libs/sdk": "2.11.1",
+  "libs/sdk": "2.12.0",
   "libs/sdk-react-provider": "0.0.10"
 }
