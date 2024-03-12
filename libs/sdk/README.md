@@ -38,14 +38,14 @@ yarn add @monerium/sdk
 
 ### Environments - Networks
 
-| Environment | Chain    | Network |
-| ----------- | -------- | ------- |
-| sandbox     | ethereum | sepolia |
-|             | polygon  | mumbai  |
-|             | gnosis   | chiado  |
-| production  | ethereum | mainnet |
-|             | polygon  | mainnet |
-|             | gnosis   | mainnet |
+| Environment | Chain              | ChainId  |
+| ----------- | ------------------ | -------- |
+| sandbox     | ethereum (sepolia) | 11155111 |
+|             | polygon (mumbai)   | 80001    |
+|             | gnosis (chiado)    | 10200    |
+| production  | ethereum           | 1        |
+|             | polygon            | 137      |
+|             | gnosis             | 100      |
 
 ## Usage Examples
 
@@ -222,8 +222,8 @@ await monerium.linkAddress(profileId, {
   message: LINK_MESSAGE
   signature,
   accounts: [
-    {"currency":"eur","chain":"ethereum","network":"sepolia"},
-    {"currency":"eur","chain":"gnosis","network":"chiado"}
+    {"currency":"eur","chain":"ethereum"},
+    {"currency":"eur","chain":"gnosis"}
   ],
 } as LinkAddress);
 ```
@@ -281,7 +281,6 @@ const order = await monerium.placeOrder({
   message,
   memo: 'Powered by Monerium SDK',
   chain: 'ethereum',
-  network: 'sepolia',
   // supportingDocumentId, see below
 });
 ```

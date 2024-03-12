@@ -4,8 +4,7 @@ import {
   rfc3339,
   getAmount,
   getIban,
-  getNetwork,
-  mapChainAndNetwork,
+  mapChain,
   getChain,
 } from '../src/utils';
 import encodeBase64Url from 'crypto-js/enc-base64url';
@@ -97,7 +96,6 @@ describe('url params', () => {
           id: 'testId',
           address: 'testAddress',
           chain: 'ethereum',
-          network: 'mainnet',
           balances: [
             {
               currency: Currency.eur,
@@ -117,7 +115,6 @@ describe('url params', () => {
           id: 'testId',
           address: 'testAddress',
           chain: 'polygon',
-          network: 'mainnet',
           balances: [
             {
               currency: Currency.eur,
@@ -146,7 +143,6 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'mainnet',
           },
           {
             address: 'testAddress1',
@@ -154,7 +150,6 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'gnosis',
-            network: 'mainnet',
           },
         ],
       };
@@ -176,7 +171,6 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'mainnet',
           },
           {
             address: 'testAddress2',
@@ -184,7 +178,6 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'mainnet',
           },
         ],
       };
@@ -206,14 +199,12 @@ describe('url params', () => {
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'sepolia',
           },
           {
             address: 'testAddress2',
             currency: Currency.eur,
             standard: 'iban' as PaymentStandard,
             chain: 'ethereum',
-            network: 'sepolia',
           },
         ],
       };
@@ -278,21 +269,20 @@ describe('placeOrderMessage', () => {
   });
 });
 
-describe('mapChainAndNetwork', () => {
-  it('should add network and chain properties and remove chainId if chainId is present', () => {
+describe('mapChain', () => {
+  it('should add chain properties and remove chainId if chainId is present', () => {
     const body = { chainId: 11155111 };
     const expectedBody = {
-      network: getNetwork(11155111),
       chain: getChain(11155111),
     };
 
-    expect(mapChainAndNetwork(body)).toEqual(expectedBody);
+    expect(mapChain(body)).toEqual(expectedBody);
   });
 
   it('should not modify the body object if chainId is not present', () => {
     const body = { someProperty: 'someValue' };
     const expectedBody = { ...body };
 
-    expect(mapChainAndNetwork(body)).toEqual(expectedBody);
+    expect(mapChain(body)).toEqual(expectedBody);
   });
 });

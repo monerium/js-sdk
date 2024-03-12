@@ -1,11 +1,4 @@
-import {
-  Balances,
-  Chain,
-  ChainId,
-  Currency,
-  Networks,
-  Profile,
-} from '../src/types';
+import { Balances, Chain, ChainId, Currency, Profile } from '../src/types';
 
 export const rfc3339 = (d: Date) => {
   if (d.toString() === 'Invalid Date') {
@@ -100,35 +93,13 @@ export const getChain = (chainId: number): Chain => {
   }
 };
 
-/**
- * Get the corresponding Monerium SDK Network from the current chain id
- * @returns The Network
- */
-export const getNetwork = (chainId: number): Networks => {
-  switch (chainId) {
-    case 1:
-    case 100:
-    case 137:
-      return 'mainnet';
-    case 11155111:
-      return 'sepolia';
-    case 10200:
-      return 'chiado';
-    case 80001:
-      return 'mumbai';
-    default:
-      throw new Error(`Network not supported: ${chainId}`);
-  }
-};
-
 export const getIban = (profile: Profile, address: string, chainId: number) => {
   return (
     profile.accounts.find(
       (account) =>
         account.address === address &&
         account.iban &&
-        account.chain === getChain(chainId) &&
-        account.network === getNetwork(chainId)
+        account.chain === getChain(chainId)
     )?.iban ?? ''
   );
 };
@@ -152,13 +123,12 @@ export const getAmount = (
   );
 };
 
-export const mapChainAndNetwork = (body: any) => {
+export const mapChain = (body: any) => {
   if (body?.chainId) {
     const { chainId, ...rest } = body;
     return {
       ...rest,
       chain: getChain(chainId),
-      network: getNetwork(chainId),
     };
   }
   return body;

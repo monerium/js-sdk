@@ -57,17 +57,14 @@ describe('MoneriumClient', () => {
             {
               currency: Currency.eur,
               chain: 'ethereum',
-              network: 'sepolia',
             },
             {
               currency: Currency.eur,
               chain: 'gnosis',
-              network: 'chiado',
             },
             {
               currency: Currency.eur,
               chain: 'polygon',
-              network: 'mumbai',
             },
           ],
         }),
@@ -127,7 +124,6 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'sepolia',
         }),
       })
     );
@@ -158,8 +154,7 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'sepolia',
-        } as any /** to bypass type error for chain and network, for backwards compatibility */
+        } as any /** to bypass type error for chain, for backwards compatibility */
       )
       .catch(() => ({}));
 
@@ -180,7 +175,6 @@ describe('MoneriumClient', () => {
               standard: PaymentStandard.chain,
               address: '0x1234567890123456789012345678901234567890',
               chain: 'ethereum',
-              network: 'sepolia',
             },
             details: {
               firstName: 'Mockbank',
@@ -190,7 +184,6 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'sepolia',
         }),
       })
     );
@@ -222,8 +215,7 @@ describe('MoneriumClient', () => {
             message: placeOrderMessage,
             memo: 'Powered by Monerium SDK',
             chain: 'ethereum',
-            network: 'sepolia',
-          } as any /** to bypass typeerror for chain and network */
+          } as any /** to bypass typeerror for chain */
         )
       )
     ).rejects.toThrow('Chain not supported: 7');

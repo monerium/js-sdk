@@ -16,7 +16,6 @@ export function App() {
       client_id: 'f99e629b-6dca-11ee-8aa6-5273f65ed05b',
       redirect_uri: 'http://localhost:4200',
       // optional automatic wallet selection:
-      // network: "mumbai",
       // chain: "polygon",
       // address: "0xValidAddress72413Fa92980B889A1eCE84dD",
       // signature: "0xValidSignature0df2b6c9e0fc067ab29bdbf322bec30aad7c46dcd97f62498a91ef7795957397e0f49426e000b0f500c347219ddd98dc5080982563055e918031c"

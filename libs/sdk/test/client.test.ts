@@ -27,7 +27,7 @@ import {
   OWNER_SIGNATURE,
   PUBLIC_KEY,
 } from './constants';
-import { getChain, getNetwork } from '../src/utils';
+import { getChain } from '../src/utils';
 import { generateCodeChallenge } from '../src/helpers';
 
 const message = 'I hereby declare that I am the address owner.';
@@ -143,11 +143,11 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=sepolia`
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum`
     );
   });
 
-  test('authorization code flow with chain and network', async () => {
+  test('authorization code flow with chain', async () => {
     const client = new MoneriumClient();
 
     const authFlowUrl = client.getAuthFlowURI({
@@ -155,14 +155,13 @@ describe('MoneriumClient', () => {
       client_id: 'testClientId',
       address: '0x',
       chain: 'ethereum',
-      network: 'sepolia',
     });
 
     const codeVerifier = window.localStorage.getItem(STORAGE_CODE_VERIFIER);
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(authFlowUrl).toBe(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum&network=sepolia`
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x&chain=ethereum`
     );
   });
 
@@ -199,17 +198,14 @@ describe('MoneriumClient', () => {
       accounts: [
         {
           chain: 'ethereum',
-          network: 'sepolia',
           currency: Currency.eur,
         },
         {
           chain: 'gnosis',
-          network: 'chiado',
           currency: Currency.eur,
         },
         {
           chain: 'polygon',
-          network: 'mumbai',
           currency: Currency.eur,
         },
       ] as any /** to bypass typeerror to test backwards compatibility */,
@@ -325,9 +321,9 @@ describe('MoneriumClient', () => {
       {
         address: '0xd58C5Db52B5B3Eb24EE38AF287d2cb0F424172A5',
         chain: 'ethereum',
+        network: 'sepolia',
         currency: 'eur',
         decimals: 18,
-        network: 'sepolia',
         symbol: 'EURe',
         ticker: 'EUR',
       },
@@ -382,7 +378,7 @@ describe('MoneriumClient', () => {
     const challenge = generateCodeChallenge(codeVerifier as string);
 
     expect(replaceMock).toHaveBeenCalledWith(
-      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x1234&signature=0x5678&chain=polygon&network=mainnet`
+      `https://api.monerium.dev/auth?client_id=testClientId&redirect_uri=http%3A%2F%2Fexample.com&code_challenge=${challenge}&code_challenge_method=S256&response_type=code&address=0x1234&signature=0x5678&chain=polygon`
     );
     replaceMock.mockRestore();
   });
@@ -480,20 +476,17 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-        } as any /** to bypass typeerror for chain and network */
+        } as any /** to bypass typeerror for chain */
       )
       .catch((err) => {
         expect(err.errors?.message).toBe('timestamp is expired');
       });
   });
 
-  test('get chain and network from chainId', () => {
+  test('get chain from chainId', () => {
     expect(getChain(1)).toBe('ethereum');
     expect(getChain(137)).toBe('polygon');
     expect(getChain(80001)).toBe('polygon');
-    expect(getNetwork(1)).toBe('mainnet');
-    expect(getNetwork(137)).toBe('mainnet');
-    expect(getNetwork(10200)).toBe('chiado');
   });
 });
 

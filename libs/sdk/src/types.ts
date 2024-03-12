@@ -8,60 +8,7 @@ export type Config = {
 
 export type ENV = 'sandbox' | 'production';
 
-export type EthereumTestnet = 'sepolia';
-export type GnosisTestnet = 'chiado';
-export type PolygonTestnet = 'mumbai';
-
 export type Chain = 'ethereum' | 'gnosis' | 'polygon';
-export type Networks =
-  | EthereumTestnet
-  | GnosisTestnet
-  | PolygonTestnet
-  | 'mainnet';
-
-// -- Commons
-export type NetworkSemiStrict<C extends Chain> = C extends 'ethereum'
-  ? EthereumTestnet | 'mainnet'
-  : C extends 'gnosis'
-  ? GnosisTestnet | 'mainnet'
-  : C extends 'polygon'
-  ? PolygonTestnet | 'mainnet'
-  : never;
-
-export type NetworkStrict<
-  C extends Chain,
-  E extends ENV
-> = E extends 'production'
-  ? 'mainnet'
-  : E extends 'sandbox'
-  ? C extends 'ethereum'
-    ? EthereumTestnet
-    : C extends 'gnosis'
-    ? GnosisTestnet
-    : C extends 'polygon'
-    ? PolygonTestnet
-    : never
-  : never;
-
-/*
- * -- isValid:
- * const network: Network<'ethereum', 'sandbox'> = 'sepolia';
- * const network: Network<'ethereum'> = 'mainnet';
- * const network: Network<'ethereum'> = 'sepolia'
- * const network: Network = 'chiado'
- *
- * -- isInValid:
- * const network: Network<'ethereum', 'sandbox'> = 'chiado';
- * const network: Network<'ethereum'> = 'chiado';
- */
-export type Network<
-  C extends Chain = Chain,
-  E extends ENV = ENV
-> = C extends Chain
-  ? E extends ENV
-    ? NetworkStrict<C, E> & NetworkSemiStrict<C>
-    : never
-  : never;
 
 export type ChainId = number | 1 | 11155111 | 100 | 137 | 10200 | 80001;
 
@@ -161,11 +108,9 @@ export type PKCERequest = {
   address?: string;
   /** the signature of the wallet to automatically link */
   signature?: string;
-  /** @deprecated - Use chainId  */
-  network?: Network;
   /** @deprecated - Use chainId */
   chain?: Chain;
-  /** The network of the wallet to automatically link  */
+  /** The chainId of the wallet to automatically link  */
   chainId?: ChainId;
 };
 
@@ -249,7 +194,6 @@ export interface Account {
   iban?: string;
   // sortCode?: string;
   // accountNumber?: string;
-  network: Network;
   chain: Chain;
   id?: string;
   state?: AccountState;
@@ -272,7 +216,6 @@ export interface Balances {
   id: string;
   address: string;
   chain: Chain;
-  network: Network;
   balances: Balance[];
 }
 
@@ -307,8 +250,6 @@ export interface CrossChain extends Identifier {
   chainId: ChainId;
   /** @deprecated - Use chainId */
   chain?: Chain;
-  /** @deprecated - Use chainId */
-  network?: Network;
 }
 
 export interface SCAN extends Identifier {
@@ -379,7 +320,6 @@ export interface Token {
   ticker: Ticker;
   symbol: TokenSymbol;
   chain: Chain;
-  network: Network;
   /** The address of the EURe contract on this network */
   address: string;
   /** How many decimals this token supports */
@@ -403,8 +343,6 @@ export interface NewOrderByAddress extends NewOrderCommon {
   address: string;
   /** @deprecated - Use 'chainId' */
   chain?: Chain;
-  /** @deprecated - Use 'chainId' */
-  network?: Network;
   chainId: ChainId;
 }
 export interface NewOrderByAccountId extends NewOrderCommon {
@@ -432,8 +370,6 @@ export interface SupportingDoc {
 
 export interface CurrencyAccounts {
   /** @deprecated - Use 'chainId' */
-  network?: Network;
-  /** @deprecated - Use 'chainId' */
   chain?: Chain;
   chainId: ChainId;
   currency: Currency;
@@ -444,8 +380,6 @@ export interface LinkAddress {
   message: string;
   signature: string;
   accounts: CurrencyAccounts[];
-  /** @deprecated - Use 'chainId' */
-  network?: Network;
   /** @deprecated - Use 'chainId' */
   chain?: Chain;
   chainId?: ChainId;
