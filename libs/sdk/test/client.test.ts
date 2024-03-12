@@ -14,6 +14,7 @@ import {
   STORAGE_CODE_VERIFIER,
   STORAGE_REFRESH_TOKEN,
 } from '../src/constants';
+import { rfc3339 } from '../src/utils';
 import { Currency, Order, PaymentStandard } from '../src/types';
 
 import {
@@ -254,7 +255,6 @@ describe('MoneriumClient', () => {
         expect.objectContaining({
           // id: '4b208818-44e3-11ed-adac-b2efc0e6677d',
           chain: 'ethereum',
-          network: 'sepolia',
           address: PUBLIC_KEY,
         }),
       ])
@@ -417,7 +417,9 @@ describe('MoneriumClient', () => {
     });
 
     const date = new Date().toISOString();
-    const placeOrderMessage = `Send EUR 10 to GR1601101250000000012300695 at ${date}`;
+    const rfc3339date = rfc3339(new Date(date));
+
+    const placeOrderMessage = `Send EUR 10 to GR1601101250000000012300695 at ${rfc3339date}`;
     const placeOrderSignatureHash =
       '0x23bf7e1b240d238b13cb293673c3419915402bb34435af62850b1d8e63f82c564fb73ab19691cf248594423dd01e441bb2ccb38ce2e2ecc514dfc3075bea829e1c';
 
@@ -440,10 +442,9 @@ describe('MoneriumClient', () => {
         memo: 'Powered by Monerium SDK',
         chainId: 11155111,
         chain: 'ethereum',
-        network: 'sepolia',
       })
       .catch((err) => {
-        expect(err.message).toBe('Invalid signature');
+        expect(err.errors?.signature).toBe('invalid signature');
       });
   });
 
@@ -479,11 +480,10 @@ describe('MoneriumClient', () => {
           message: placeOrderMessage,
           memo: 'Powered by Monerium SDK',
           chain: 'ethereum',
-          network: 'sepolia',
         } as any /** to bypass typeerror for chain and network */
       )
       .catch((err) => {
-        expect(err.message).toBe('Timestamp is expired');
+        expect(err.errors?.message).toBe('timestamp is expired');
       });
   });
 

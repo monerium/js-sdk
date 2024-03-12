@@ -44,6 +44,30 @@ export function App() {
       }
     };
     fetchData();
+
+    const uploadFile = async (file: File) => {
+      console.log(
+        '%c file to upload',
+        'color:white; padding: 30px; background-color: darkgreen',
+        file
+      );
+
+      const fileUploaded = await monerium?.uploadSupportingDocument(
+        file as File
+      );
+      console.log(
+        '%c fileUploaded',
+        'color:white; padding: 30px; background-color: darkgreen',
+        fileUploaded
+      );
+    };
+
+    document
+      ?.getElementById('fileInput')
+      ?.addEventListener('change', function (event) {
+        const file = (event?.target as any)?.files?.[0];
+        uploadFile(file);
+      });
   }, [monerium, isAuthorized]);
 
   return (
@@ -64,6 +88,7 @@ export function App() {
       )}
 
       <p>{authCtx?.name || authCtx?.email}</p>
+      {isAuthorized && <input type="file" id="fileInput"></input>}
     </div>
   );
 }

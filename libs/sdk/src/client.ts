@@ -342,16 +342,12 @@ export class MoneriumClient {
    * {@link https://monerium.dev/api-docs#operation/supporting-document}
    */
   uploadSupportingDocument(document: File): Promise<SupportingDoc> {
-    const searchParams = urlEncoded(
-      document as unknown as Record<string, string>
-    );
+    const formData = new FormData();
+    formData.append('file', document as unknown as Blob);
 
-    return this.#api<SupportingDoc>(
-      'post',
-      'files/supporting-document',
-      searchParams,
-      true
-    );
+    return rest<SupportingDoc>(`${this.#env.api}/files`, 'post', formData, {
+      Authorization: this.#authorizationHeader || '',
+    });
   }
 
   // -- Helper Methods
