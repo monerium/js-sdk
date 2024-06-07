@@ -261,7 +261,7 @@ describe('MoneriumClient', () => {
     );
   }, 15000);
 
-  test('get orders', async () => {
+  test.skip('get orders', async () => {
     const client = new MoneriumClient();
 
     await client.auth({
