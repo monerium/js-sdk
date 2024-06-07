@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.1](https://github.com/monerium/js-sdk/compare/sdk-v2.12.0...sdk-v2.12.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* export types ([1428df6](https://github.com/monerium/js-sdk/commit/1428df61b7fdd55c384e89188adf14bc7d46e806))
+
 ## [2.12.0](https://github.com/monerium/js-sdk/compare/sdk-v2.11.1...sdk-v2.12.0) (2024-03-12)
 
 ### Bug Fixes
